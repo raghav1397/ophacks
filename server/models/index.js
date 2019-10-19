@@ -12,6 +12,6 @@ const models = { User, Message };
 
 module.exports = { 
   'connectDb':connectDb,
-  'models': models };
+  'models': models 
+};
 
-//export default models;
