@@ -1,10 +1,10 @@
-import 'dotenv/config';
-import cors from 'cors';
-import bodyParser from 'body-parser';
-import express from 'express';
+const cors = require('cors');
+const bodyParser = require('body-parser');
+const express = require('express');
 
-import models, { connectDb } from './models';
-import routes from './routes';
+const models = require('./models').models;
+const connectDb = require('./models').connectDb;
+const routes = require('./routes');
 
 const app = express();
 
@@ -24,8 +24,6 @@ app.use(async (req, res, next) => {
 });
 
 // Routes
-
-app.use('/session', routes.session);
 app.use('/users', routes.user);
 app.use('/messages', routes.message);
 
@@ -43,8 +41,9 @@ connectDb().then(async () => {
     createUsersWithMessages();
   }
 
-  app.listen(process.env.PORT, () =>
-    console.log(`Example app listening on port ${process.env.PORT}!`),
+  // TODO: Change port
+  app.listen(5000, () =>
+    console.log(`Example app listening on port 5000!`),
   );
 });
 
