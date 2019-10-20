@@ -9,6 +9,8 @@ router.get('/', async (req, res) => {
   return res.send(visitations);
 });
 
+var flag=false;
+
 router.post('/create', async (req, res) => {
   const familyName = req.body.familyName;
   const firstName = req.body.firstName;
@@ -99,31 +101,37 @@ router.post('/create', async (req, res) => {
 });
 
 router.post('/update', async (req, res) => {
-  var body = json.parse(req.body);
-  var doc = await models.Visitation.findOne({visitId:body.visitId});
-  console.log(body.visitId);
-  const familyName = doc['familyName'];
-  const firstName = doc['firstName'];
-  const lastName = doc['lastName'];
-  const dateOfVisit = doc['dateOfVisit'];
-  const child = doc['child'];
-  const visitationType = doc['visitationType'];
-  var checkedIn = true;
-  console.log("Update");
-  await models.Visitation.deleteOne({visitId:req.body.visitId});
-  const visit = new models.Visitation({
-    visitId: req.body.visitId,
-    firstName: firstName,
-    lastName: lastName,
-    familyName: familyName,
-    visitationType: visitationType,
-    dateOfVisit: dateOfVisit,
-    child: child,
-    checkedIn: checkedIn
-  });
-  let isSaved = await visit.save();
-  if(isSaved){
-    res.status(200).send({visitId: req.body.visitId})
+  console.log(flag);
+  if(!flag){
+    console.log(req.body);
+    var body = JSON.parse(req.body);
+    var doc = await models.Visitation.findOne({visitId:body.visitId});
+    console.log(body.visitId);
+    const familyName = doc['familyName'];
+    const firstName = doc['firstName'];
+    const lastName = doc['lastName'];
+    const dateOfVisit = doc['dateOfVisit'];
+    const child = doc['child'];
+    const visitationType = doc['visitationType'];
+    var checkedIn = true;
+    console.log("Update");
+    await models.Visitation.deleteOne({visitId:req.body.visitId});
+    const visit = new models.Visitation({
+      visitId: req.body.visitId,
+      firstName: firstName,
+      lastName: lastName,
+      familyName: familyName,
+      visitationType: visitationType,
+      dateOfVisit: dateOfVisit,
+      child: child,
+      checkedIn: checkedIn
+    });
+      
+    let isSaved = await visit.save();
+    if(isSaved){
+      res.status(200).send({visitId: req.body.visitId})
+    }
+    flag=true;
   }
 });
 
