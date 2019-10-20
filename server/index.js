@@ -38,7 +38,7 @@ connectDb().then(async () => {
       models.Message.deleteMany({}),
     ]);
 
-    createUsersWithMessages();
+    createUser("1234");
   }
 
   // TODO: Change port
@@ -47,34 +47,35 @@ connectDb().then(async () => {
   );
 });
 
-const createUsersWithMessages = async () => {
-  const user1 = new models.User({
-    username: 'rwieruch',
+const createUser = async (formData) => {
+  console.log(formData);
+  const user = new models.User({
+
+    username: "formData",
+    firstName: "formData",
+    lastName: "formData",
+    dateOfBirth: new Date('1986-06-05'),
+    address: "formData",
+    zipCode: 453,
+    city: "formData",
+    phoneNumber: 123,
+    gender: "formData",
+    housingType: "formData",
+    maritalStatus: "formData",
+    ethnicity: ["formData", "formData1"],
+    selfStatus: "formData",
+    education: "formData",
+    primaryLanguage: "formData",
+    dentalInsurance: true,
+    primaryDoctor: true,
+    monthlyIncomeAmount: 9999999999,
+    monthlyIncomeType: "formData",
+    medicalInsurance: "formData",
+    childCareType: "formData",
+
   });
 
-  const user2 = new models.User({
-    username: 'ddavids',
-  });
 
-  const message1 = new models.Message({
-    text: 'Published the Road to learn React',
-    user: user1.id,
-  });
+  await user.save();
 
-  const message2 = new models.Message({
-    text: 'Happy to release ...',
-    user: user2.id,
-  });
-
-  const message3 = new models.Message({
-    text: 'Published a complete ...',
-    user: user2.id,
-  });
-
-  await message1.save();
-  await message2.save();
-  await message3.save();
-
-  await user1.save();
-  await user2.save();
 };

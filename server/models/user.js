@@ -5,6 +5,70 @@ const userSchema = new mongoose.Schema({
     type: String,
     unique: true,
   },
+  firstName: {
+    type: String,
+  },
+  lastName: {
+    type: String,
+  },
+  dateOfBirth: {
+    type: Date,
+  },
+  address: {
+    type: String,
+  },
+  zipCode: {
+    type: Number,
+  },
+  city: {
+    type: String,
+  },
+  phoneNumber: {
+    type: Number,
+    max: 9999999999,
+  },
+  gender: {
+    type: String,
+  },
+  housingType: {
+    type: String,
+  },
+  maritalStatus: {
+    type: String,
+  },
+  ethnicity: {
+    type: [String],
+  },
+  selfStatus: {
+    type: [String],
+  },
+  education: {
+    type: String,
+  },
+  primaryLanguage: {
+    type: String,
+  },
+  dentalInsurance: {
+    type: Boolean,
+  },
+  primaryDoctor: {
+    type: Boolean,
+  },
+  employmentType: {
+    type: String,
+  },
+  monthlyIncomeAmount: {
+    type: Number,
+  },
+  monthlyIncomeType: {
+    type: [String],
+  },
+  medicalInsurance: {
+    type: String,
+  },
+  childCareType: {
+    type: String,
+  }
 });
 
 userSchema.statics.findByUserName = async function(username) {
