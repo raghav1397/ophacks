@@ -83,6 +83,10 @@ userSchema.statics.findByUserName = async function(username) {
   return user;
 };
 
+userSchema.statics.deleteByUserName = async function(username) {
+  await this.deleteOne({username: username});
+};
+
 userSchema.pre('remove', function(next) {
   this.model('Message').deleteMany({ user: this._id }, next);
 });

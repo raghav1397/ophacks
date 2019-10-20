@@ -5,7 +5,7 @@ const router = Router();
 router.get('/', async (req, res) => {
   if(req.query.userName){
     const user = await req.context.models.User.findByUserName(
-      req.query.userName,
+      req.query.userName
     );
     return res.send(user);
   }
