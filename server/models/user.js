@@ -87,6 +87,34 @@ userSchema.statics.deleteByUserName = async function(username) {
   await this.deleteOne({username: username});
 };
 
+// userSchema.statics.checkByUserName1 = async function(username) {
+//   await this.findOne({username: username}, function(e, data){
+//     if(e){
+//       console.log("success");
+//       return "success";
+//     }
+//     else{
+//       console.log("failure");
+//       return "failure";
+//     }
+// })};
+
+userSchema.statics.checkByUserName = async function(username) {
+  var cnt;
+  await this.countDocuments({username:username}, function(err, c){
+    if(err) 
+    {
+      cnt = 0;
+    }
+    else {
+      cnt = c;
+    }
+  });
+  return cnt;
+};
+
+
+
 userSchema.pre('remove', function(next) {
   this.model('Message').deleteMany({ user: this._id }, next);
 });

@@ -38,9 +38,8 @@ connectDb().then(async () => {
       models.Message.deleteMany({}),
     ]);
 
-    createUser("1234");
-    setTimeout(deleteUser, 3000);
-    setTimeout(retrieveUser, 3000);
+    await createUser("1234");
+    await updateUser();
 
   }
 
@@ -51,70 +50,47 @@ connectDb().then(async () => {
 });
 
 const createUser = async (formData) => {
-  const user = new models.User({
+  var cnt = await models.User.checkByUserName("formData");
+  if(cnt == 0){
+    const user = new models.User({
+      username: "formData",
+      firstName: "formData",
+      lastName: "formData",
+      dateOfBirth: new Date('1986-06-05'),
+      address: "formData",
+      zipCode: 453,
+      city: "formData",
+      phoneNumber: 123,
+      gender: "formData",
+      housingType: "formData",
+      maritalStatus: "formData",
+      ethnicity: ["formData", "formData1"],
+      selfStatus: "formData",
+      education: "formData",
+      primaryLanguage: "formData",
+      dentalInsurance: true,
+      primaryDoctor: true,
+      monthlyIncomeAmount: 9999999999,
+      monthlyIncomeType: "formData",
+      medicalInsurance: "formData",
+      childCareType: "formData",
 
-    username: "formData",
-    firstName: "formData",
-    lastName: "formData",
-    dateOfBirth: new Date('1986-06-05'),
-    address: "formData",
-    zipCode: 453,
-    city: "formData",
-    phoneNumber: 123,
-    gender: "formData",
-    housingType: "formData",
-    maritalStatus: "formData",
-    ethnicity: ["formData", "formData1"],
-    selfStatus: "formData",
-    education: "formData",
-    primaryLanguage: "formData",
-    dentalInsurance: true,
-    primaryDoctor: true,
-    monthlyIncomeAmount: 9999999999,
-    monthlyIncomeType: "formData",
-    medicalInsurance: "formData",
-    childCareType: "formData",
+    });
 
-  });
-
-  const user1 = new models.User({
-
-    username: "formData1",
-    firstName: "formData",
-    lastName: "formData",
-    dateOfBirth: new Date('1986-06-05'),
-    address: "formData",
-    zipCode: 453,
-    city: "formData",
-    phoneNumber: 123,
-    gender: "formData",
-    housingType: "formData",
-    maritalStatus: "formData",
-    ethnicity: ["formData", "formData1"],
-    selfStatus: "formData",
-    education: "formData",
-    primaryLanguage: "formData",
-    dentalInsurance: true,
-    primaryDoctor: true,
-    monthlyIncomeAmount: 9999999999,
-    monthlyIncomeType: "formData",
-    medicalInsurance: "formData",
-    childCareType: "formData",
-
-  });
-
-
-  await user.save();
-  await user1.save();
+    await user.save();
+  }
+  else{
+    console.log("Already UserName Exists");
+  }
 
 };
 
 const retrieveUser = async () => {
-  const user = await models.User.findByUserName("formData1");
+  const user = await models.User.findByUserName("formData");
   return user;
 };
 
-const deleteUser = async () => {
+const updateUser = async(formData) => {
   await models.User.deleteByUserName("formData");
-};
-
+  createUser("1234");
+}
