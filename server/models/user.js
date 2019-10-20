@@ -115,7 +115,17 @@ userSchema.statics.checkByUserName = async (username) => {
   return cnt;
 };
 
-
+userSchema.statics.getAge = async function(username, firstname, lastname) {		
+  let user = await this.findOne({		
+    username: username,		
+    firstName: firstname,		
+    lastName: lastname,		
+  });		
+  if(user) {		
+    var age = Math.ceil(Math.abs(Date.now() - new Date(user['dateOfBirth']))/(1000*60*60*24*365));		
+    return age;		
+  }		
+}
 
 userSchema.pre('remove', function(next) {
   this.model('Message').deleteMany({ user: this._id }, next);
