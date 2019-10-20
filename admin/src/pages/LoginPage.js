@@ -1,4 +1,5 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import {Link} from 'react-router-dom';
 
 export default class LoginPage extends Component {
     constructor(props){
@@ -28,7 +29,7 @@ export default class LoginPage extends Component {
                     <input type="text" name="username" ref={this.textUser} placeholder="Username" required className="input-user mb-3 mt-3" />
                     <input type="text" name="password" ref={this.textPassword} placeholder="Password" required className="input-user mb-3" />
                     <div>
-                        <button type="submit" className="btn btn-primary" id="submit-user">Submit</button>
+                        <button type="submit" className="btn btn-primary" id="submit-user"><Link to="/user/admin">Submit</Link></button>
                     </div>
                 </form>
             </div>
