@@ -16,7 +16,6 @@ export default class LoginPage extends Component {
         //bcrypt hash password
        // if(personObj["username"] === ("admin")){
             alert("Successful login");
-            this.props.history.push({pathname: "/user/admin",})
        // }else{
        //    alert("Not Successful")
        // }
