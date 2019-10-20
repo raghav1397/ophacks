@@ -49,6 +49,8 @@ connectDb().then(async () => {
   );
 });
 
+
+
 const createUser1 = async (formData) => {
   const user1 = new models.User({
     username: "formData",
@@ -78,32 +80,65 @@ const createUser1 = async (formData) => {
 };
 
 const createUser = async (formData) => {
-  const user = new models.User({
-    username: "formData",
-    firstName: "formData",
-    lastName: "formData",
-    dateOfBirth: new Date('1986-06-05'),
-    address: "formData",
-    zipCode: 453,
-    city: "formData",
-    phoneNumber: 123,
-    gender: "formData",
-    housingType: "formData",
-    maritalStatus: "formData",
-    ethnicity: ["formData", "formData1"],
-    selfStatus: "formData",
-    education: "formData",
-    primaryLanguage: "formData",
-    dentalInsurance: true,
-    primaryDoctor: true,
-    monthlyIncomeAmount: 9999999999,
-    monthlyIncomeType: "formData",
-    medicalInsurance: "formData",
-    childCareType: "formData",
+  const cnt = await models.User.checkByUserName("formData");
+  console.log(cnt);
+  if(cnt == 0){
+    const user = new models.User({
+      username: "formData",
+      firstName: "formData",
+      lastName: "formData",
+      dateOfBirth: new Date('1986-06-05'),
+      address: "formData",
+      zipCode: 453,
+      city: "formData",
+      phoneNumber: 123,
+      gender: "formData",
+      housingType: "formData",
+      maritalStatus: "formData",
+      ethnicity: ["formData", "formData1"],
+      selfStatus: "formData",
+      education: "formData",
+      primaryLanguage: "formData",
+      dentalInsurance: true,
+      primaryDoctor: true,
+      monthlyIncomeAmount: 9999999999,
+      monthlyIncomeType: "formData",
+      medicalInsurance: "formData",
+      childCareType: "formData",
 
-  });
+    });
+  
+    const user1 = new models.User({
+      username: "formData1",
+      firstName: "formData",
+      lastName: "formData",
+      dateOfBirth: new Date('1986-06-05'),
+      address: "formData",
+      zipCode: 453,
+      city: "formData",
+      phoneNumber: 123,
+      gender: "formData",
+      housingType: "formData",
+      maritalStatus: "formData",
+      ethnicity: ["formData", "formData1"],
+      selfStatus: "formData",
+      education: "formData",
+      primaryLanguage: "formData",
+      dentalInsurance: true,
+      primaryDoctor: true,
+      monthlyIncomeAmount: 9999999999,
+      monthlyIncomeType: "formData",
+      medicalInsurance: "formData",
+      childCareType: "formData",
 
-  await user.save();
+    });
+
+    await user.save();
+    await user1.save();
+  }
+  else{
+    console.log("Already uname exists");
+  }
 
 };
 
