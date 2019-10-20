@@ -113,7 +113,6 @@ export default class CreateUserPage extends Component {
                 </Row>
                 {/*  <FirstCreateFormScreen handler={this.handler} />*/}
                
-                <SecondCreateFormScreen handler={this.handler} />
                 <ThirdCreateFormScreen handler={this.handler} />
                 <FourCreateFormScreen handler={this.handler} />
                 <button type="cancel">Cancel</button>
