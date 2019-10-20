@@ -1,12 +1,17 @@
 import React from 'react';
 import { Container, Row,Col } from 'react-bootstrap'
+import { Nav, Navbar } from  'react-bootstrap'
 
 const PageTemplate = ({ children }) => (
     <div id="page-template">
-        <nav id="navbar-special">Header Navigation </nav>
+        <Navbar bg="primary" variant="dark">
+    <Navbar.Brand href="#home">Chandler Care Center </Navbar.Brand>
+    {/* <Nav className="mr-auto">
+    </Nav> */}
+  </Navbar>
         <Container>
             <Row id="logo-header">
-                <Col><h1>Candler Care Center</h1></Col>
+                <Col></Col>
             </Row>
             {children}
         </Container>

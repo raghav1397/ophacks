@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PageTemplate from './PageTemplate';
 import { Redirect } from 'react-router-dom';
 import { Row, Col } from 'react-bootstrap';
+var QRCode = require('qrcode.react');
 
 class CustomerViewPage extends Component {
     constructor(props) {
@@ -54,7 +55,19 @@ class CustomerViewPage extends Component {
                         </Col>
                     </Row>
                     <Row>
-                        <Col><p>QR Code</p></Col>
+                        <Col>
+                        <Row>
+                            <Col>
+                                <p>QR Code Scanner</p>
+                            </Col>
+                        </Row>
+                        
+                        <Row>
+                            <Col>
+                                <QRCode value="2c5ea4c0-4067-11e9-8bad-9b1deb4d3b7d" />
+                            </Col>
+                        </Row>
+                        </Col>
                     </Row>
 
                 </PageTemplate>

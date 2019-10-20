@@ -8,12 +8,13 @@ body{
 }
 .container{
   width:100%;
-  height:calc(100% - 3em);
+  height:calc(100% - 2em);
   padding:0;
-  background-color:purple;
+  margin: 0 auto;
+
 }
 .row{
-  background-color:#eef7fa;
+  /* background-color:#eef7fa; */
 }
 #center-container{
   margin-left:25%;
@@ -22,13 +23,13 @@ body{
   background-color:#C0C0C0;
 }
 .splash-screen{
+  margin-top: 10%;
   min-width:300px;
-  max-width:100%;
   height:100%;
   padding: 2em;
   background-color:white;
   margin: auto;
-  border:1px solid black;
+  /* border:1px solid black; */
 }
 .margin-auto{
   margin: 0;

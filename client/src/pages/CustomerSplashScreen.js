@@ -9,18 +9,19 @@ export default class CustomerSplashScreen extends Component {
         return (
             <PageTemplate>
                  <Row>
-                    <Col>
+                    <Col style={{marginTop:"25%"}}>
                         <div className="splash-screen shadow">
-                            <div className="home-icon">
+                            <div className="home-icon" style={{textAlign: "center"}}>
                                 <FaHome />
                             </div>
-                            <h3>Welcome</h3>
-                            <div>
-                                <Button variant="primary" > <Link to="/newuser">New User</Link></Button>
+                            <h3 style={{textAlign: "center"}}>Welcome</h3>
+                            <br></br>
+                            <div style={{textAlign: "center"}}>
+                                <Button variant="primary" block> <Link to="/newuser">New User</Link></Button>
                             </div>
                             <br></br>
-                            <div>
-                                <Button variant="primary"><Link to="/login">Returning User</Link></Button>
+                            <div style={{textAlign: "center"}}>
+                                <Button variant="primary" block><Link to="/login">Returning User</Link></Button>
                             </div>
                         </div>
                     </Col>
