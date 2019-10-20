@@ -87,10 +87,6 @@ const createUser = async (formData) => {
 
     console.log(user);
     await user.save();
-  // }
-  // else{
-  //   console.log("Already UserName Exists");
-  // }
 
 };
 
