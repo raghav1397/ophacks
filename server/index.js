@@ -57,7 +57,7 @@ connectDb().then(async () => {
 });
 
 const createUser = async (formData) => {
-  var cnt = await models.User.checkByUserName("formData");
+  var cnt = await models.User.checkByUserName("formData",models.User);
   if(cnt == 0){
     const user = new models.User({
       username: "formData",

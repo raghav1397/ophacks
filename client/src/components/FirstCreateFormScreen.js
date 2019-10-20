@@ -30,8 +30,6 @@ export default class FirstCreateFormScreen extends Component {
     }
 
     handleChange(propertyName, event) {
-        // event.preventDefault();
-        console.log("event::", event);
         const contact = this.state.form1;
         contact[propertyName] = event.target.value;
         this.setState({ form1: contact });

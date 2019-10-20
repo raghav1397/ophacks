@@ -42,33 +42,35 @@ class CustomerViewPage extends Component {
         } else {
             return (
                 <PageTemplate>
-                    <Row>
-                        <Col>
-                            <h2>Welcome {this.state.username}</h2>
-                        </Col>
-                    </Row>
-                    <Row>
-                        <Col>
-                            <p>User: {this.state.username}</p>
-                            <p>Visited Since: {this.state.visitedDate}</p>
-                            <p>Vists Left: {this.state.vistsLeft}</p>
-                        </Col>
-                    </Row>
-                    <Row>
-                        <Col>
+                    <div className="splash-screen shadow" style={{textAlign:"center"}}>
                         <Row>
                             <Col>
-                                <p>QR Code Scanner</p>
+                                <h2>Welcome {this.state.username}</h2>
                             </Col>
                         </Row>
-                        
                         <Row>
                             <Col>
-                                <QRCode value="2c5ea4c0-4067-11e9-8bad-9b1deb4d3b7d" />
+                                <p>User: {this.state.username}</p>
+                                <p>Visited Since: {this.state.visitedDate}</p>
+                                <p>Vists Left: {this.state.vistsLeft}</p>
                             </Col>
                         </Row>
-                        </Col>
-                    </Row>
+                        <Row>
+                            <Col>
+                            <Row>
+                                <Col>
+                                    <p>QR Code Scanner</p>
+                                </Col>
+                            </Row>
+                            
+                            <Row>
+                                <Col>
+                                    <QRCode value="2c5ea4c0-4067-11e9-8bad-9b1deb4d3b7d" />
+                                </Col>
+                            </Row>
+                            </Col>
+                        </Row>
+                    </div>
 
                 </PageTemplate>
             )

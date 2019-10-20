@@ -118,4 +118,3 @@ const Visitation = mongoose.model('Visitation', visitationSchema);
 module.exports = {
     'Visitation' : Visitation
 }
-    

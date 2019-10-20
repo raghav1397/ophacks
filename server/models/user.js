@@ -86,7 +86,7 @@ userSchema.statics.findByUserName = async function(username) {
 userSchema.statics.createUser = async function(username, userObj) {
   console.log(userObj);
   //Count users
-  let cnt = await this.countDocuments({username:username});
+  let cnt = await userObj.countDocuments({username:username});
   if(cnt >= 0){
     await userObj.save();
     return { 
@@ -101,9 +101,9 @@ userSchema.statics.createUser = async function(username, userObj) {
 
 };
 
-userSchema.statics.checkByUserName = async (username) => {
+userSchema.statics.checkByUserName = async (username,userObj) => {
   var cnt;
-  await this.countDocuments({username:username}, function(err, c){
+  await userObj.countDocuments({username:username}, function(err, c){
     if(err) 
     {
       cnt = 0;
@@ -126,6 +126,7 @@ userSchema.statics.getAge = async function(username, firstname, lastname) {
     return age;		
   }		
 }
+
 
 userSchema.pre('remove', function(next) {
   this.model('Message').deleteMany({ user: this._id }, next);
