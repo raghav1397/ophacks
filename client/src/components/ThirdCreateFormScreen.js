@@ -15,11 +15,17 @@ export default class ThirdCreateFormScreen extends Component {
         }
         this.handleChange = this.handleChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
+        this.onClick = this.onClick.bind(this);
     }
 
     onSubmit(event){
         event.preventDefault();
+        //this.props.handler(this.state);
+    }
+    onClick(event){
+        event.preventDefault();
         this.props.handler(this.state);
+        this.props.changeButton(3);
     }
 
     handleChange(propertyName, event) {
@@ -93,7 +99,7 @@ export default class ThirdCreateFormScreen extends Component {
                             <option value="other">Other</option>
                         </select>
                     </div>
-                    <button>Next</button>
+                    <button onClick={this.onClick}>Next</button>
                 </form>
                 </Col>
             </Row>

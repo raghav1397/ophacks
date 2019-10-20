@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PageTemplate from './PageTemplate';
 import { Redirect } from 'react-router-dom';
 import { Row, Col } from 'react-bootstrap';
-var QRCode = require('qrcode.react');
+//var QRCode = require('qrcode.react')
 
 class CustomerViewPage extends Component {
     constructor(props) {
@@ -14,6 +14,7 @@ class CustomerViewPage extends Component {
             badrequest: false
         }
     }
+
     componentDidMount() {
         console.log("Did mount activate")
         try {
@@ -64,7 +65,7 @@ class CustomerViewPage extends Component {
                         
                         <Row>
                             <Col>
-                                <QRCode value="2c5ea4c0-4067-11e9-8bad-9b1deb4d3b7d" />
+                               {/*  <QRComponent value="2c5ea4c0-4067-11e9-8bad-9b1deb4d3b7d" /> */}
                             </Col>
                         </Row>
                         </Col>

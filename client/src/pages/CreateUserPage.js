@@ -10,43 +10,54 @@ import { FaUserPlus } from 'react-icons/fa';
 const HOSTNAME = "http://localhost:5000";
 
 
+//switch for current slide
+const SwitchCard= ({curIndex, changeButton,handler}) => {
+
+    switch (curIndex) {
+        case 0:
+            return (<FirstCreateFormScreen changeButton={changeButton} handler={handler}/>)
+        case 1:
+            return (<SecondCreateFormScreen changeButton={changeButton} handler={handler}/>)
+        case 2:
+            return (<ThirdCreateFormScreen changeButton={changeButton} handler={handler}/>)
+        case 3:
+            return (<FourCreateFormScreen changeButton={changeButton} handler={handler}/>)
+        default:
+            return (
+                <div>
+                    <FirstCreateFormScreen />
+                    <SecondCreateFormScreen />
+                    <ThirdCreateFormScreen />
+                    <FourCreateFormScreen />
+                </div>
+            );
+    }
+}
+
 export default class CreateUserPage extends Component {
     constructor() {
         super();
         this.state = {
             formData: {},
-            currentSlide: 0
+            currentSlideIndex: 0,
+            returnCurrentSlide:{}
         }
         this.onSubmit = this.onSubmit.bind(this);
         this.handler = this.handler.bind(this);
+        this.currentSlide = this.currentSlide.bind(this);
     }
 
     //stack -> keep current state
     //switch for render component
+  
 
-    //switch for rendering component
-    onSwitchCard(numberSwitch) {
-
-        switch (numberSwitch) {
-            case 0:
-                return (<FirstCreateFormScreen />)
-            case 1:
-                return (<SecondCreateFormScreen />)
-            case 2:
-                return (<ThirdCreateFormScreen />)
-            case 3:
-                return (<FourCreateFormScreen />)
-            default:
-                return (
-                    <div>
-                        <FirstCreateFormScreen />
-                        <SecondCreateFormScreen />
-                        <ThirdCreateFormScreen />
-                        <FourCreateFormScreen />
-                    </div>
-                );
-        }
+    currentSlide(number){
+        this.setState({
+            currentSlideIndex : number
+        })
     }
+
+
 
 
     //on Submit
@@ -91,19 +102,17 @@ export default class CreateUserPage extends Component {
                     <Col>
                         <div className="splash-screen">
                             <Row>
-                                <Col className="home-icon"><FaUserPlus /></Col>
+                                <Col><span className="home-icon"><FaUserPlus /></span> <h2 className="text-center">Create User Page</h2></Col>
                             </Row>
                             <Row>
-                                <Col> <h2>Create User Page</h2></Col>
-                            </Row>
-                            <Row>
-                                <FirstCreateFormScreen />
+                                <SwitchCard curIndex={this.state.currentSlideIndex} changeButton={this.currentSlide} handler={this.handler}/>
                             </Row>
 
                         </div>
                     </Col>
                 </Row>
-                <FirstCreateFormScreen handler={this.handler} />
+                {/*  <FirstCreateFormScreen handler={this.handler} />*/}
+               
                 <SecondCreateFormScreen handler={this.handler} />
                 <ThirdCreateFormScreen handler={this.handler} />
                 <FourCreateFormScreen handler={this.handler} />

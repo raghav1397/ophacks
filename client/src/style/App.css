@@ -36,7 +36,6 @@ html,body {
 }
 #page-template{
   height:inherit;
-  background-color:red;
 }
 .btn a{
   color:white;
@@ -51,7 +50,6 @@ html,body {
   text-align: center;
 }
 .home-icon{
-  text-align:left !important;
   font-size: 2em;
 }
 .input-create-control{
@@ -60,10 +58,20 @@ html,body {
   width:100%;
   margin: auto;
 }
+.input-checkmark{
+  max-width:600px !important;
+  min-width:300px !important;
+  width:100%;
+  margin:auto;
+  display:block;
+}
 #id-user{
   min-width:300px;
   max-width:100%;
 }
 .text-right{
   text-align: right;
+}
+.text-center{
+  text-align:center;
 }
