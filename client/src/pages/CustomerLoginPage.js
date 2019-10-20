@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PageTemplate from './PageTemplate';
 import { Row, Col, Button, Form } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 const HOSTNAME = "http://localhost:5000"
 
 export default class CustomerLoginPage extends Component {
@@ -52,7 +52,16 @@ export default class CustomerLoginPage extends Component {
             if(responseJson.isError == true){
                 alert(responseJson.errorMsg);
             } else {
-                alert(responseJson.visitId)
+                // alert(responseJson.visitId)
+                let resObj = this.state.visitationForm;
+                console.log('/user/' + this.state.visitationForm.familyName);
+                resObj["visitId"] = responseJson.visitId;
+                //sent to next page
+                this.props.history.push({
+                    pathname: '/user/' + this.state.visitationForm.familyName,
+                    state: { visitationData: resObj }
+                  })
+                
             }
         });
     }

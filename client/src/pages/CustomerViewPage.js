@@ -11,19 +11,21 @@ class CustomerViewPage extends Component {
             familyName: "",
             visitedDate: "",
             vistsLeft: "",
-            badrequest: false
+            badrequest: false,
+            visitId: ""
         }
     }
 
     componentDidMount() {
         try {
             let isvisitedDate = this.props.location.state.visitedDate;
-
+            let visitationData = this.props.location.state.visitationData;
             this.setState({
-                familyName: this.props.match.params.familyName,
-                visitedDate: isvisitedDate,
-                vistsLeft: this.props.location.state.vistsLeft
+                familyName: visitationData.familyName,
+                visitedDate: visitationData.dov,
+                visitId: visitationData.visitId
             })
+            console.log(this.props.location.state)
 
         } catch (err) {
             this.setState({
@@ -52,8 +54,7 @@ class CustomerViewPage extends Component {
                             <Col>
                                 <p>User: {this.state.familyName}</p>
                                 <p>Visited Since: {this.state.visitedDate}</p>
-                                <p>Vists Left: {this.state.vistsLeft}</p>
-                               {/*  <QRComponent value="2c5ea4c0-4067-11e9-8bad-9b1deb4d3b7d" /> */}
+                                <p>Vists Left: 1</p>
                             </Col>
                         </Row>
                         <Row>
@@ -66,7 +67,7 @@ class CustomerViewPage extends Component {
                             
                             <Row>
                                 <Col>
-                                    <QRCode value="2c5ea4c0-4067-11e9-8bad-9b1deb4d3b7d" />
+                                    <QRCode value={this.state.visitId} />
                                 </Col>
                             </Row>
                             </Col>
