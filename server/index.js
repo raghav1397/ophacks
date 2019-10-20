@@ -1,6 +1,7 @@
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const express = require('express');
+const uuidv1 = require('uuid/v1');
 
 const models = require('./models').models;
 const connectDb = require('./models').connectDb;
@@ -26,7 +27,8 @@ app.use(async (req, res, next) => {
 // Routes
 app.use('/users', routes.user);
 app.use('/messages', routes.message);
-
+app.use('/visitation', routes.visitation);
+app.use('/household', routes.household);
 // Start
 
 const eraseDatabaseOnSync = true;
@@ -36,10 +38,15 @@ connectDb().then(async () => {
     await Promise.all([
       models.User.deleteMany({}),
       models.Message.deleteMany({}),
+      models.Visitation.deleteMany({}),
+      models.Household.deleteMany({})
     ]);
 
-    // await createUser("1234");
-    await updateUser();
+    await createUser("1234");
+    // await updateUser();
+    await visitCreate("1234");
+    await householdCreate("1234");
+    // await visitCount1("1234");
 
   }
 
@@ -56,7 +63,7 @@ const createUser = async (formData) => {
       username: "formData",
       firstName: "formData",
       lastName: "formData",
-      dateOfBirth: new Date('1986-06-05'),
+      dateOfBirth: new Date('2006-06-05'),
       address: "formData",
       zipCode: 453,
       city: "formData",
@@ -85,12 +92,133 @@ const createUser = async (formData) => {
 
 };
 
-const retrieveUser = async () => {
-  const user = await models.User.findByUserName("formData");
-  return user;
+const visitCreate = async (formData) => {
+  const age = await models.User.getAge("formData","formData","formData");
+  var chld=false;
+  if(age<18) {chld=true};
+
+  const visit = new models.Visitation({
+    visitId: uuidv1(),
+    username: "formData",
+    firstName: "formData",
+    lastName: "formData",
+    visitationType: "AHCCCS",
+    child: chld,
+    dateOfVisit: new Date("2019-08-02"),
+  });
+  const visit1 = new models.Visitation({
+    visitId: uuidv1(),
+    username: "formData1",
+    firstName: "formData",
+    lastName: "formData",
+    visitationType: "WIC",
+    child: chld,
+    dateOfVisit: new Date("1988-10-23"),
+  });
+  const visit2 = new models.Visitation({
+    visitId: uuidv1(),
+    username: "formData",
+    firstName: "formData1",
+    lastName: "formData2",
+    visitationType: "WIC",
+    child: chld,
+    dateOfVisit: new Date("2019-09-02"),
+  });
+  await visit.save();
+  await visit1.save();
+  await visit2.save();
+
+  var allow=false;
+  if("AHCCCS" === "AHCCCS"){
+    // yearly twice
+    var cnt = await models.Visitation.yearlyCount("formData","AHCCCS");
+    if(cnt<=2){
+      allow=true;
+    }
+  }
+  else if(formData.visitationType.equals("WIC")){
+    // yearly twice
+    var cnt = await models.Visitation.yearlyCount("formData","AHCCCS");
+    if(cnt<=2){
+      allow=true;
+    }
+  }
+  else if(formData.visitationType.equals("Food Bank")){
+    // monthly twice
+    var cnt = await models.Visitation.monthlyCount("formData","AHCCCS");
+    if(cnt <= 2){
+      allow=true;
+    }
+  }
+  else if(formData.visitationType.equals("FTF")){
+    // yearly twice
+    var cnt = await models.Visitation.yearlyCount("formData","AHCCCS");
+    if(cnt<=2){
+      allow=true;
+    }
+  }
+  else if(formData.visitationType.equals("Diapers")){
+    // yearly thrice
+    var cnt = await models.Visitation.yearlyCount("formData","AHCCCS");
+    if(cnt<=3){
+      allow=true;
+    }
+  }
+  else if(formData.visitationType.equals("Medical")){
+    // yearly twice
+    var cnt = await models.Visitation.yearlyCount("formData","AHCCCS");
+    if(cnt<=2){
+      allow=true;
+    }
+  }
+  else if(formData.visitationType.equals("Dental")){
+    // yearly twice
+    var cnt = await models.Visitation.yearlyCount("formData","AHCCCS");
+    if(cnt<=2){
+      allow=true;
+    }
+  }
+  else if(formData.visitationType.equals("Immunizations")){
+    // yearly twice
+    var cnt = await models.Visitation.yearlyCount("formData","AHCCCS");
+    if(cnt<=2){
+      allow=true;
+    }
+  }
+  else if(formData.visitationType.equals("Vision and Hearing")){
+    // yearly twice
+    var cnt = await models.Visitation.yearlyCount("formData","AHCCCS");
+    if(cnt<=2){
+      allow=true;
+    }
+  }
+
 };
 
-const updateUser = async(formData) => {
-  // await models.User.deleteByUserName("formData");
-  // createUser("1234");
+const householdCreate = async (formData) => {
+  var members = ['a','b','c'];
+  await members.forEach(function(e) {
+    var member = new models.Household({
+      username: 'formData',
+      firstName: 'formData'+e,
+      lastName: 'formData'+e,
+      relationship: 'formData',
+      childSpecial: 'formData',
+      dateOfBirth: new Date("1995-03-05"),
+      gender: 'formData',
+      ethnicity: 'formData',
+      selfStatus: 'formData',
+      primaryLanguage: 'formData',
+      nameOfSchool: 'formData',
+      dentalInsurance: true,
+      primaryDoctor: true,
+      medicalInsurance: 'formData',
+    });
+    member.save();
+  })
+}
+
+const visitCount1 = async (formData) => {
+  var cnt1 = await models.Visitation.totalFamilyCount("formData");
+  console.log(cnt1);
 }
