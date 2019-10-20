@@ -1,0 +1,84 @@
+
+Frameworks: Bootstrap-react, react-icons, react, react-router
+
+List of Fields
+
+Last Name
+First Name
+Date
+
+Address
+Apt #
+city
+zipcode
+phone number
+gender
+
+
+check boxes
+ethnicity
+white/anglo
+Black/Africian american
+Hispanic/latino
+American Indian/ Native American
+asian
+Alaska Native/aleut/eskimo
+midle-eastern/north-Africian
+Pacific Islander
+Other
+Undisclosed
+
+
+Self identify
+disability
+veternan
+mental illness
+pregnant
+postpartum
+breastfeeding
+elderly
+LGBTQ
+Female head of household
+
+Highest Education completed:
+Grades 0-8
+Grades 9-11
+Highschool diploma
+GED 
+Post Secondary
+Trade School
+2 Year Degree - Associate
+4 Year Degree - Bachelor
+Master's Degree
+PHD 
+Other
+Undisclosed
+
+
+Language
+English
+Spanish
+Other
+
+Dental Insurance
+Yes
+No 
+
+Do you have a primary Doctor?
+Yes 
+No
+
+Employment Type
+Post-Secondary Student
+Full-time
+part-time
+retired
+none
+Undisclosed
+Other
+
+
+Monthly Income
+Amount: $ number
+Income Type:______
+Commodty
