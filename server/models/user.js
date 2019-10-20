@@ -109,9 +109,9 @@ userSchema.statics.checkByUserName = async (familyName,userObj) => {
 userSchema.statics.getAge = async function(familyName, firstname, lastname) {		
   let user = await this.findOne({		
     familyName: familyName,		
-    firstName: firstname,		
+    firstName: firstname,
     lastName: lastname,		
-  });		
+  });
   if(user) {
     var age = Math.ceil(Math.abs(Date.now() - new Date(user['dateOfBirth']))/(1000*60*60*24*365));		
     return age;		

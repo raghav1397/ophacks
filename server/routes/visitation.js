@@ -13,7 +13,7 @@ router.post('/create', async (req, res) => {
   const familyName = req.body.familyName;
   const firstName = req.body.firstName;
   const lastName = req.body.lastName;
-  const age = await models.User.getAge(familyName,firstName,lastName);
+  let age = await models.User.getAge(familyName,firstName,lastName);
   let cnt;
   if(age && age.isError==true){
     //error response
@@ -25,63 +25,63 @@ router.post('/create', async (req, res) => {
   if(req.body.visitationType === "AHCCCS"){
     // yearly twice
     cnt = await models.Visitation.yearlyCount(familyName,"AHCCCS", req.body.dov);
-    if(cnt<=2){
+    if(cnt<2){
       allow=true;
     }
   }
   else if(req.body.visitationType === "WIC"){
     // yearly twice
     cnt = await models.Visitation.yearlyCount(familyName,"WIC", req.body.dov);
-    if(cnt<=2){
+    if(cnt<2){
       allow=true;
     }
   }
   else if(req.body.visitationType === "Food Bank"){
     // monthly twice
     cnt = await models.Visitation.monthlyCount(familyName,"Food Bank", req.body.dov);
-    if(cnt <= 2){
+    if(cnt < 2){
       allow=true;
     }
   }
   else if(req.body.visitationType === "FTF"){
     // yearly twice
     cnt = await models.Visitation.yearlyCount(familyName,"FTF", req.body.dov);
-    if(cnt<=2){
+    if(cnt<2){
       allow=true;
     }
   }
   else if(req.body.visitationType === "Diapers"){
     // yearly thrice
     cnt = await models.Visitation.yearlyCount(familyName,"Diapers", req.body.dov);
-    if(cnt<=3){
+    if(cnt<3){
       allow=true;
     }
   }
   else if(req.body.visitationType === "Medical"){
     // yearly twice
     cnt = await models.Visitation.yearlyCount(familyName,"Medical", req.body.dov);
-    if(cnt<=2){
+    if(cnt<2){
       allow=true;
     }
   }
   else if(req.body.visitationType === "Dental"){
     // yearly twice
     cnt = await models.Visitation.yearlyCount(familyName,"Dental", req.body.dov);
-    if(cnt<=2){
+    if(cnt<2){
       allow=true;
     }
   }
   else if(req.body.visitationType === "Immunizations"){
     // yearly twice
     cnt = await models.Visitation.yearlyCount(familyName,"Immunizations", req.body.dov);
-    if(cnt<=2){
+    if(cnt<2){
       allow=true;
     }
   }
   else if(req.body.visitationType === "Vision and Hearing"){
     // yearly twice
     cnt = await models.Visitation.yearlyCount(familyName,"Vision and Hearing", req.body.dov);
-    if(cnt<=2){
+    if(cnt<2){
       allow=true;
     }
   }
