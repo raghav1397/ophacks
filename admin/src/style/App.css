@@ -1,0 +1,30 @@
+.App {
+  text-align: left;
+}
+body{
+  background-color:grey;
+}
+.shadow-splash{
+  border: 1px solid black;
+  min-width:500px;
+  max-width:550px;
+  height:300px;
+  width:100%;
+  margin:auto;
+  margin-top:10em;
+  background-color:white;
+}
+.input-user{
+  min-width:300px;
+  max-width: 450px;
+  width:100%;
+  margin:auto;
+}
+#submit-user{
+  display:block !important;
+  margin-left:  auto;
+  margin-right: auto;
+}
+.text-center{
+  text-align:center;
+}
