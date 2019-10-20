@@ -102,9 +102,14 @@ userSchema.statics.deleteByUserName = async function(username) {
 userSchema.statics.checkByUserName = async function(username) {
   var cnt;
   await this.countDocuments({username:username}, function(err, c){
-    if(err) cnt = 0;
-    else cnt = c;
-  })
+    if(err) 
+    {
+      cnt = 0;
+    }
+    else {
+      cnt = c;
+    }
+  });
   return cnt;
 };
 
