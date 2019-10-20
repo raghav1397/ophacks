@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Row, Col, Form, Button } from 'react-bootstrap';
+import {FaArrowLeft, FaArrowRight} from 'react-icons/fa';
 
 
 export default class SecondCreateFormScreen extends Component {
@@ -16,14 +17,14 @@ export default class SecondCreateFormScreen extends Component {
         }
         this.handleChange = this.handleChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
-        this.onClick = this.onClick.bind(this);
+        this.next = this.next.bind(this);
     }
 
     onSubmit(event) {
         event.preventDefault();
         //this.props.handler(this.state);
     }
-    onClick(event) {
+    next(event) {
         event.preventDefault();
         this.props.handler(this.state);
         this.props.changeButton(2);
@@ -37,10 +38,10 @@ export default class SecondCreateFormScreen extends Component {
 
     render() {
         return (
-            <Row>
+            <Row className="w-100">
                 <Col>
                     <h2 className="text-center">Second Step</h2>
-                    <Form onSubmit={this.onSubmit}>
+                    <Form onSubmit={this.onSubmit} className="d-flex flex-column justify-content-center">
                         <span className="input-checkmark">Ethncity</span>
                         <Form.Check name="ethnicity" value="White/Anglo" label="White/Anglo" className="input-checkmark" />
                         <Form.Check name="ethnicity" value="Hispanic/Latino" label="Hispanic/Latino" className="input-checkmark" />
@@ -83,7 +84,10 @@ export default class SecondCreateFormScreen extends Component {
                             <option value="spanish">Spanish</option>
                             <option value="other">Other</option>
                         </Form.Control>
-                        <Button onClick={this.onClick} className="input-create-control">Next</Button>
+                        <div className="input-create-control d-flex justify-content-center">
+                            <Button onClick={this.previous} className="mr-2 button-create-slide"><FaArrowLeft />  Previous </Button>
+                            <Button onClick={this.next} className="button-create-slide">Next <FaArrowRight /></Button>
+                        </div>
                     </Form>
                 </Col>
             </Row >

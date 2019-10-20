@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Row, Col, Form, Button} from 'react-bootstrap';
+import {FaArrowLeft, FaArrowRight} from 'react-icons/fa';
 
 
 export default class FirstCreateFormScreen extends Component {
@@ -23,7 +24,7 @@ export default class FirstCreateFormScreen extends Component {
         }
         this.onSubmit = this.onSubmit.bind(this);
         this.handleChange = this.handleChange.bind(this);
-        this.onClick = this.onClick.bind(this);
+        this.next = this.next.bind(this);
     }
 
 
@@ -31,7 +32,7 @@ export default class FirstCreateFormScreen extends Component {
         event.preventDefault();
         this.props.handler(this.state);
     }
-    onClick(event){
+    next(event){
         event.preventDefault();
         this.props.handler(this.state);
         this.props.changeButton(1);
@@ -55,8 +56,8 @@ export default class FirstCreateFormScreen extends Component {
     render() {
         return (
             <Row className="w-100">
-                <Col className="d-flex flex-column justify-content-center">
-                    <h2 className="text-center">First Form</h2>
+                <Col>
+                    <h2 className="text-center">First Step</h2>
                     <Form className="d-flex flex-column justify-content-center">
                         <Form.Control type="text" name="familyName" value={this.state.form1.familyName} onChange={this.handleChange.bind(this, 'familyName')} className="input-create-control mb-3" placeholder="Family Name" required />
                         <Form.Control type="text" name="firstname" value={this.state.form1.firstName} onChange={this.handleChange.bind(this, 'firstName')} className="input-create-control mb-3" placeholder="First Name" required />
@@ -93,7 +94,10 @@ export default class FirstCreateFormScreen extends Component {
                             <option value="windowed">Windowed</option>
                             <option value="undisclosed">Undisclosed</option>
                         </Form.Control>
-                        <Button className="input-create-control" onClick={this.onClick}>Next</Button>
+                        <div className="input-create-control d-flex justify-content-center">
+                            <Button onClick={this.previous} className="mr-2 button-create-slide hide-button"><FaArrowLeft />  Previous </Button>
+                            <Button onClick={this.next} className="button-create-slide">Next <FaArrowRight /></Button>
+                        </div>
                     </Form>
                 </Col>
             </Row >

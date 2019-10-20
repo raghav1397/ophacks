@@ -75,3 +75,12 @@ html,body {
 .text-center{
   text-align:center;
 }
+.button-create-slide{
+  width:120px !important;
+}
+.hide-button{
+  visibility: hidden;
+}
+.show-button{
+  visibility:visible;
+}
