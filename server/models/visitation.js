@@ -23,6 +23,9 @@ const visitationSchema = new mongoose.Schema({
     },
     child: {
         type: Boolean,
+    },
+    checkedIn: {
+        type: Boolean,
     }
 });
 
@@ -32,16 +35,20 @@ visitationSchema.statics.totalFamilyCount = async function(visitationType) {
 };
 
 visitationSchema.statics.yearlyCount = async function(familyName, visitationType, dateOfVisit) {
-    const cur_date = new Date(dateOfVisit);
+    var cur_date = new Date(dateOfVisit);
     var yr = cur_date.getFullYear();
-    var mn = cur_date.getMonth();
+    var mn = cur_date.getMonth()+1;
+    var dt = cur_date.getDate()+2;
+    var end_date = new Date(yr.toString()+"-"+mn.toString()+"-"+dt.toString())
+    console.log(end_date);
     if(mn<6){
         var start_date = new Date((yr-1).toString()+"-07-01");
     }
     else{
         var start_date = new Date(yr.toString()+"-07-01");
     }
-    let cnt = await this.countDocuments({familyName: familyName, visitationType:visitationType, dateOfVisit: {"$gte": start_date, "$lt": cur_date}});
+    let cnt = await this.countDocuments({familyName: familyName, visitationType:visitationType, checkedIn:true, dateOfVisit: {"$gte": start_date, "$lt": end_date}});
+    console.log(cnt);
     return cnt;
 }
 
@@ -51,7 +58,7 @@ visitationSchema.statics.monthlyCount = async function(familyName, visitationTyp
     var yr = cur_date.getFullYear();
     var mn = cur_date.getMonth();
     var start_date = new Date(yr.toString()+"-"+mn.toString()+"-01");
-    await this.countDocuments({familyName: familyName, visitationType:visitationType, dateOfVisit: {"$gte": start_date, "$lt": cur_date}}, function(err, c){
+    await this.countDocuments({familyName: familyName, visitationType:visitationType, checkedIn:true, dateOfVisit: {"$gte": start_date, "$lt": cur_date}}, function(err, c){
     if(err)
     {
         cnt = 0;
