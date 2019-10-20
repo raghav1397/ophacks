@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PageTemplate from './PageTemplate';
 import { Row, Col, Button, Form } from 'react-bootstrap';
-const HOSTNAME = "http://localhost:5000"
+const HOSTNAME = "http://localhost:5000/api"
 
 export default class CustomerLoginPage extends Component {
     constructor() {

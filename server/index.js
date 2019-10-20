@@ -15,6 +15,7 @@ app.use(cors());
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.static(__dirname+'/public'));
 
 app.use(async (req, res, next) => {
   req.context = {
@@ -24,10 +25,16 @@ app.use(async (req, res, next) => {
 });
 
 // Routes
-app.use('/users', routes.user);
-app.use('/messages', routes.message);
-app.use('/visitation', routes.visitation);
-app.use('/household', routes.household);
+app.use('/api/users', routes.user);
+app.use('/api/messages', routes.message);
+app.use('/api/visitation', routes.visitation);
+app.use('/api/household', routes.household);
+
+// 404 -> react
+app.get('*', function (req, res) {
+  res.setHeader('Content-Type', 'text/html');
+  res.sendFile(__dirname+'/public/index.html');
+});
 // Start
 
 const eraseDatabaseOnSync = false;
