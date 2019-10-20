@@ -21,7 +21,8 @@ export default class CustomerLoginPage extends Component {
     onClick(event, stringuser) {
         console.log("Current Event" + event);
         console.log("Current User" + stringuser);
-        //
+        return (
+        <Link to={{ pathname: "/user/" + this.state.username, state: { visitedDate: this.state.visitedDate, vistsLeft: this.state.vistsLeft } }}>Submit</Link>);
     }
     render() {
         return (
@@ -35,7 +36,7 @@ export default class CustomerLoginPage extends Component {
                     <Col className="w-100">
                         <Form onSubmit={this.onSubmit} id="username-form" className="w-100">
                             <Form.Control id="id-user" type="text" name="id-user" placeholder="username" className="mb-2" />
-                            <Button className="mb-3"><Link to={{ pathname: "/user/" + this.state.username, state: { visitedDate: this.state.visitedDate, vistsLeft: this.state.vistsLeft } }}>Submit</Link></Button>
+                            <Button className="mb-3">Submit</Button>
                         </Form>
                     </Col>
                 </Row>

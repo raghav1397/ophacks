@@ -6,22 +6,26 @@ import FourCreateFormScreen from '../components/FourCreateFormScreen'
 import PageTemplate from './PageTemplate';
 import { Row, Col } from 'react-bootstrap';
 import { FaUserPlus } from 'react-icons/fa';
+import SummaryScreen from '../components/SummaryScreen';
+import {useHistory} from 'react-router-dom';
 
 const HOSTNAME = "http://localhost:5000";
 
 
 //switch for current slide
-const SwitchCard= ({curIndex, changeButton,handler}) => {
+const SwitchCard = ({ curIndex, changeButton, handler, visbilityFun }) => {
 
     switch (curIndex) {
         case 0:
-            return (<FirstCreateFormScreen changeButton={changeButton} handler={handler}/>)
+            return (<FirstCreateFormScreen changeButton={changeButton} handler={handler} />)
         case 1:
-            return (<SecondCreateFormScreen changeButton={changeButton} handler={handler}/>)
+            return (<SecondCreateFormScreen changeButton={changeButton} handler={handler} />)
         case 2:
-            return (<ThirdCreateFormScreen changeButton={changeButton} handler={handler}/>)
+            return (<ThirdCreateFormScreen changeButton={changeButton} handler={handler} />)
         case 3:
-            return (<FourCreateFormScreen changeButton={changeButton} handler={handler}/>)
+            return (<FourCreateFormScreen changeButton={changeButton} visbilityFun={visbilityFun} handler={handler} />);
+        case 4:
+            return(<SummaryScreen handler={handler} />)
         default:
             return (
                 <div>
@@ -40,26 +44,30 @@ export default class CreateUserPage extends Component {
         this.state = {
             formData: {},
             currentSlideIndex: 0,
-            returnCurrentSlide:{}
+            returnCurrentSlide: {},
+            visbility: "hide-button"
         }
         this.onSubmit = this.onSubmit.bind(this);
         this.handler = this.handler.bind(this);
         this.currentSlide = this.currentSlide.bind(this);
+        this.visbilityFun = this.visbilityFun.bind(this);
     }
 
     //stack -> keep current state
     //switch for render component
-  
 
-    currentSlide(number){
+
+    currentSlide(number) {
         this.setState({
-            currentSlideIndex : number
+            currentSlideIndex: number
         })
     }
 
-
-
-
+    onCancel(event){
+        event.preventDefault();
+        let history = useHistory();
+        history.push("/");
+    }
     //on Submit
     onSubmit(event) {
 
@@ -92,6 +100,13 @@ export default class CreateUserPage extends Component {
         }
         this.setState({ formData: stateObj });
     }
+    
+    visbilityFun(event){
+        event.preventDefault();
+        this.setState({
+            visbility: "show-button"
+        });
+    }
 
 
     render() {
@@ -105,18 +120,19 @@ export default class CreateUserPage extends Component {
                                 <Col><span className="home-icon"><FaUserPlus /></span> <h2 className="text-center">Create User Page</h2></Col>
                             </Row>
                             <Row>
-                                <SwitchCard curIndex={this.state.currentSlideIndex} changeButton={this.currentSlide} handler={this.handler}/>
+                                <SwitchCard curIndex={this.state.currentSlideIndex} changeButton={this.currentSlide} handler={this.handler} visbilityFun={this.visbilityFun} />
                             </Row>
-
+                            <Row className="w-100">
+                                <div className="d-flex flex-column justify-content-center w-100">
+                                    <button type="cancel" className={"btn btn-primary input-create-control mb-3 mt-3 " + this.state.visbility} onClick={this.onCancel}>Cancel</button>
+                                    <button type="submit" className={"btn btn-primary input-create-control " + this.state.visbility} onClick={this.onSubmit}>Submit</button>
+                                </div>
+                            </Row>
                         </div>
                     </Col>
                 </Row>
                 {/*  <FirstCreateFormScreen handler={this.handler} />*/}
-               
-                <ThirdCreateFormScreen handler={this.handler} />
-                <FourCreateFormScreen handler={this.handler} />
-                <button type="cancel">Cancel</button>
-                <button type="submit" onClick={this.onSubmit}>Submit</button>
+
                 <p>{this.state.submittedor}</p>
                 {/* </form> */}
             </PageTemplate>
