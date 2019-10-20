@@ -38,7 +38,7 @@ connectDb().then(async () => {
       models.Message.deleteMany({}),
     ]);
 
-    await createUser("1234");
+    // await createUser("1234");
     await updateUser();
 
   }
@@ -91,6 +91,6 @@ const retrieveUser = async () => {
 };
 
 const updateUser = async(formData) => {
-  await models.User.deleteByUserName("formData");
-  createUser("1234");
+  // await models.User.deleteByUserName("formData");
+  // createUser("1234");
 }

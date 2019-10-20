@@ -83,23 +83,25 @@ userSchema.statics.findByUserName = async function(username) {
   return user;
 };
 
-userSchema.statics.deleteByUserName = async function(username) {
-  await this.deleteOne({username: username});
+userSchema.statics.createUser = async function(username, userObj) {
+  console.log(userObj);
+  //Count users
+  let cnt = await this.countDocuments({username:username});
+  if(cnt >= 0){
+    await userObj.save();
+    return { 
+      isError : false,
+      msg: "success"
+    }
+  }
+  else{
+    console.log("Already UserName Exists");
+    return { isError : true}
+  }
+
 };
 
-// userSchema.statics.checkByUserName1 = async function(username) {
-//   await this.findOne({username: username}, function(e, data){
-//     if(e){
-//       console.log("success");
-//       return "success";
-//     }
-//     else{
-//       console.log("failure");
-//       return "failure";
-//     }
-// })};
-
-userSchema.statics.checkByUserName = async function(username) {
+userSchema.statics.checkByUserName = async (username) => {
   var cnt;
   await this.countDocuments({username:username}, function(err, c){
     if(err) 
