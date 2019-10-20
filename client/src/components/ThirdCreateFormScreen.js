@@ -1,4 +1,5 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import {Row,Col} from 'react-bootstrap';
 
 export default class ThirdCreateFormScreen extends Component {
 
@@ -29,7 +30,8 @@ export default class ThirdCreateFormScreen extends Component {
 
     render() {
         return (
-            <div className="third-create-step">
+            <Row className="third-create-step">
+                <Col>
                 <form onSubmit={this.onSubmit}>
                     <h2>Third Create Form</h2>
                     <div className="insurnace">
@@ -93,7 +95,8 @@ export default class ThirdCreateFormScreen extends Component {
                     </div>
                     <button>Next</button>
                 </form>
-            </div>
+                </Col>
+            </Row>
                 )
             }
         }

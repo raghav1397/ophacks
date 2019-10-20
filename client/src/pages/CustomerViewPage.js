@@ -53,6 +53,9 @@ class CustomerViewPage extends Component {
                             <p>Vists Left: {this.state.vistsLeft}</p>
                         </Col>
                     </Row>
+                    <Row>
+                        <Col><p>QR Code</p></Col>
+                    </Row>
 
                 </PageTemplate>
             )

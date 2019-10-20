@@ -1,10 +1,11 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import { Row, Col } from 'react-bootstrap';
 
 export default class FirstCreateFormScreen extends Component {
 
-    constructor(){
+    constructor() {
         super();
-        this.state ={
+        this.state = {
             form1: {
                 firstname: '',
                 lastname: '',
@@ -22,111 +23,115 @@ export default class FirstCreateFormScreen extends Component {
     }
 
 
-    onSubmit(event){
+    onSubmit(event) {
         event.preventDefault();
         this.props.handler(this.state);
     }
 
     handleChange(propertyName, event) {
         // event.preventDefault();
-        console.log("event::",event);
+        console.log("event::", event);
         const contact = this.state.form1;
         contact[propertyName] = event.target.value;
         this.setState({ form1: contact });
     }
 
     handleOptionChange(event) {
-        this.setState({form1: {
-            maritalStatus: event.target.value
-        }})
+        this.setState({
+            form1: {
+                maritalStatus: event.target.value
+            }
+        })
     }
 
-    
+
     render() {
         return (
-            <div>
-                <form onSubmit={this.onSubmit}>
-                    <h2>First Form</h2>
-                    <div>
-                        <label for="create-last-name">Last Name:</label>
-                        <input id="create-last-name" type="text" 
-                        value={this.state.form1.lastname} onChange={this.handleChange.bind(this, 'lastname')} required/>
-                        <label for="create-first-name">First Name:</label>
-                        <input id="create-first-name" type="text" 
-                        value={this.state.form1.firstname} onChange={this.handleChange.bind(this, 'firstname')} required/>
-                        <label for="create-dob">Date of Birth:</label>
-                        <input type="date" id="create-date" 
-                        value={this.state.form1.dob} onChange={this.handleChange.bind(this, 'dob')} required/>
-                        <br></br>
-                        <br></br>
-                        <label for="create-address">Address Line 1: </label>
-                        <input id="create-address" type="text" 
-                        value={this.state.form1.addressLine1} onChange={this.handleChange.bind(this, 'addressLine1')}/>
-                        <label for="create-aprt-number">Apartment Line 2:</label>
-                        <input id="create-aprt-number" type="text" 
-                        value={this.state.form1.addressLine2} onChange={this.handleChange.bind(this, 'addressLine2')}/>
-                        <label for="create-zipcode">Zipcode: </label>
-                        <input id="create-zipcode" type="text" 
-                        value={this.state.form1.zipcode} onChange={this.handleChange.bind(this, 'zipcode')} required/>
-                        <br></br>
-                        <br></br>
-                        <label for="create-phone-number">Phone Number:</label>
-                        <input id="create-phone-number" 
-                        value={this.state.form1.phNo} onChange={this.handleChange.bind(this, 'phNo')} required/>
-                        <br />
-                        <br />
-                        <div> Gender Type
+            <Row>
+                <Col>
+                    <form onSubmit={this.onSubmit}>
+                        <h2 className="text-right">First Form</h2>
+                        <div>
+                            <label for="create-last-name">Last Name:</label>
+                            <input id="create-last-name" type="text"
+                                value={this.state.form1.lastname} onChange={this.handleChange.bind(this, 'lastname')} required />
+                            <label for="create-first-name">First Name:</label>
+                            <input id="create-first-name" type="text"
+                                value={this.state.form1.firstname} onChange={this.handleChange.bind(this, 'firstname')} required />
+                            <label for="create-dob">Date of Birth:</label>
+                            <input type="date" id="create-date"
+                                value={this.state.form1.dob} onChange={this.handleChange.bind(this, 'dob')} required />
+                            <br></br>
+                            <br></br>
+                            <label for="create-address">Address Line 1: </label>
+                            <input id="create-address" type="text"
+                                value={this.state.form1.addressLine1} onChange={this.handleChange.bind(this, 'addressLine1')} />
+                            <label for="create-aprt-number">Apartment Line 2:</label>
+                            <input id="create-aprt-number" type="text"
+                                value={this.state.form1.addressLine2} onChange={this.handleChange.bind(this, 'addressLine2')} />
+                            <label for="create-zipcode">Zipcode: </label>
+                            <input id="create-zipcode" type="text"
+                                value={this.state.form1.zipcode} onChange={this.handleChange.bind(this, 'zipcode')} required />
+                            <br></br>
+                            <br></br>
+                            <label for="create-phone-number">Phone Number:</label>
+                            <input id="create-phone-number"
+                                value={this.state.form1.phNo} onChange={this.handleChange.bind(this, 'phNo')} required />
+                            <br />
+                            <br />
+                            <div> Gender Type
                         <select name="gender"
-                        value={this.state.form1.gender} onChange={this.handleChange.bind(this, 'gender')}>
-                                <option value="male">Male</option>
-                                <option value="female">Female</option>
-                        </select>
-                        </div>
-                        <br></br>
-                        <div>Housing Type:
+                                    value={this.state.form1.gender} onChange={this.handleChange.bind(this, 'gender')}>
+                                    <option value="male">Male</option>
+                                    <option value="female">Female</option>
+                                </select>
+                            </div>
+                            <br></br>
+                            <div>Housing Type:
                         <select name="housingtype"
-                        value={this.state.form1.housingType} onChange={this.handleChange.bind(this, 'housingType')} required>
-                                <option value="ergency">Emergency Housing Shelter/Mission/Transistional</option>
-                                <option value="evacuee">Evacuee</option>
-                                <option value="ownhome">Own Home</option>
-                                <option value="privaterental">Private Rental</option>
-                                <option value="publichousing">public housing</option>
-                                <option value="undisclosed">Undisclosed</option>
-                                <option value="unhoused">Unhoused</option>
-                                <option value="withfamily">With family/friends</option>
-                                <option value="youthhome">Youth Home/Shelter</option>
-                                <option value="refugee">Refugee</option>
-                            </select>
+                                    value={this.state.form1.housingType} onChange={this.handleChange.bind(this, 'housingType')} required>
+                                    <option value="ergency">Emergency Housing Shelter/Mission/Transistional</option>
+                                    <option value="evacuee">Evacuee</option>
+                                    <option value="ownhome">Own Home</option>
+                                    <option value="privaterental">Private Rental</option>
+                                    <option value="publichousing">public housing</option>
+                                    <option value="undisclosed">Undisclosed</option>
+                                    <option value="unhoused">Unhoused</option>
+                                    <option value="withfamily">With family/friends</option>
+                                    <option value="youthhome">Youth Home/Shelter</option>
+                                    <option value="refugee">Refugee</option>
+                                </select>
+                            </div>
+                            <br />
+                            <br />
+                            <div className="martial status">
+                                <span>Marital Status: </span>
+                                <input type="radio" name="martial-status" value="single"
+                                    checked={this.state.selectedOption === 'single'}
+                                    onChange={this.handleOptionChange.bind(this)} /> <span>Single</span>
+                                <input type="radio" name="martial-status" value="married"
+                                    checked={this.state.selectedOption === 'married'}
+                                    onChange={this.handleOptionChange.bind(this)} /> <span>Married</span>
+                                <input type="radio" name="martial-status" value="divorced"
+                                    checked={this.state.selectedOption === 'divorced'}
+                                    onChange={this.handleOptionChange.bind(this)} /> <span>Divoreced</span>
+                                <input type="radio" name="martial-status" value="seperated"
+                                    checked={this.state.selectedOption === 'separated'}
+                                    onChange={this.handleOptionChange.bind(this)} /> <span>Separated</span>
+                                <input type="radio" name="martial-status" value="windowed"
+                                    checked={this.state.selectedOption === 'windowed'}
+                                    onChange={this.handleOptionChange.bind(this)} /> <span>Windowed</span>
+                                <input type="radio" name="martial-status" value="undisclosed"
+                                    checked={this.state.selectedOption === 'undisclosed'}
+                                    onChange={this.handleOptionChange.bind(this)} /> <span>Undisclosed</span>
+                            </div>
+                            <br />
+                            <br />
                         </div>
-                        <br />
-                        <br />
-                        <div className="martial status">
-                            <span>Marital Status: </span>
-                            <input type="radio" name="martial-status" value="single" 
-                            checked={this.state.selectedOption === 'single'} 
-                            onChange={this.handleOptionChange.bind(this)} /> <span>Single</span>
-                            <input type="radio" name="martial-status" value="married" 
-                            checked={this.state.selectedOption === 'married'} 
-                            onChange={this.handleOptionChange.bind(this)} /> <span>Married</span>
-                            <input type="radio" name="martial-status" value="divorced" 
-                            checked={this.state.selectedOption === 'divorced'} 
-                            onChange={this.handleOptionChange.bind(this)} /> <span>Divoreced</span>
-                            <input type="radio" name="martial-status" value="seperated" 
-                            checked={this.state.selectedOption === 'separated'} 
-                            onChange={this.handleOptionChange.bind(this)} /> <span>Separated</span>
-                            <input type="radio" name="martial-status" value="windowed" 
-                            checked={this.state.selectedOption === 'windowed'} 
-                            onChange={this.handleOptionChange.bind(this)} /> <span>Windowed</span>
-                            <input type="radio" name="martial-status" value="undisclosed"
-                            checked={this.state.selectedOption === 'undisclosed'} 
-                            onChange={this.handleOptionChange.bind(this)} /> <span>Undisclosed</span>
-                        </div>
-                        <br />
-                        <br />
-                    </div>
-                    <button>Next</button>
-                </form>
-            </div>
+                        <button>Next</button>
+                    </form>
+                </Col>
+            </Row>
         )
     }
 }

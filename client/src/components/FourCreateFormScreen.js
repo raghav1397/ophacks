@@ -1,4 +1,5 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import {Row,Col} from 'react-bootstrap';
 
 export default class FourCreateFormScreen extends Component {
 
@@ -30,7 +31,8 @@ export default class FourCreateFormScreen extends Component {
 
     render() {
         return (
-            <div>
+            <Row>
+                <Col>
                 <form onSubmit={this.onSubmit}>
                     <h2>Fourth Screen</h2>
                     <label for="monthly-amount">Monthly Amount:</label>
@@ -50,7 +52,9 @@ export default class FourCreateFormScreen extends Component {
                     </select>
                     <button>Next</button>
                 </form>
-            </div>
+                </Col>
+
+            </Row>
         )
     }
 }

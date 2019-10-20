@@ -3,8 +3,11 @@ import FirstCreateFormScreen from '../components/FirstCreateFormScreen'
 import SecondCreateFormScreen from '../components/SecondCreateFormScreen'
 import ThirdCreateFormScreen from '../components/ThirdCreateFormScreen'
 import FourCreateFormScreen from '../components/FourCreateFormScreen'
-import PageTemplate from './PageTemplate'
-const HOSTNAME = "http://localhost:5000"
+import PageTemplate from './PageTemplate';
+import {Row,Col} from 'react-bootstrap';
+import {FaUserPlus} from 'react-icons/fa';
+
+const HOSTNAME = "http://localhost:5000";
 
 
 export default class CreateUserPage extends Component {
@@ -52,7 +55,13 @@ export default class CreateUserPage extends Component {
     render() {
         return (
             <PageTemplate>
-                <h2>Create User Page</h2>
+                <Row>
+                    <Col className="home-icon"><FaUserPlus/></Col>
+                </Row>
+                <Row>
+                    <Col> <h2>Create User Page</h2></Col>
+                </Row>
+               
                 {/* <form onSubmit={this.onSubmit}> */}
                    <FirstCreateFormScreen handler={this.handler}/>
                    <SecondCreateFormScreen handler={this.handler}/>
