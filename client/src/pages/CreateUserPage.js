@@ -33,7 +33,6 @@ export default class CreateUserPage extends Component {
             monthyincomeother:[""],
             medicaltype: "",
             childcaretype: "",
-
         }
         this.onSubmit = this.onSubmit.bind(this);
     }

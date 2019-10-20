@@ -1,10 +1,13 @@
-import React from 'react'
+import React from 'react';
+import { Container } from 'react-bootstrap'
 
 const PageTemplate = ({ children }) => (
     <div>
         <nav>Header Navigation</nav>
-        <h1>Candler Center App</h1>
-        {children}
+        <Container>
+            <h1>Candler Center App</h1>
+            {children}
+        </Container>
     </div>
 );
 
