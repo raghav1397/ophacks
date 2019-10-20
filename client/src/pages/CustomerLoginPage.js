@@ -8,14 +8,15 @@ export default class CustomerLoginPage extends Component {
     constructor() {
         super();
         this.state = {
-            username: "username",
+            familyName: "",
             visitedDate: "09/20/2019",
             vistsLeft: "2",
             visitationForm: {
                 familyName: '',
                 firstName: '',
                 lastName: '',
-                visitationType: ''
+                visitationType: '',
+                dov: ''
             }
         }
         this.onSubmit = this.onSubmit.bind(this);
@@ -28,8 +29,14 @@ export default class CustomerLoginPage extends Component {
     }
 
     onSubmit(event) {
-        console.log(this.state);
-        const visitationData = this.state.visitationForm;  
+        const visitationData = this.state.visitationForm;
+        console.log(visitationData)
+
+        if(visitationData.visitationType == ""){
+            alert("Please mention Purpose of visit");
+            return;
+        }
+            
         event.preventDefault();
         fetch(HOSTNAME +  '/visitation/create',{
             method: 'POST',
@@ -38,8 +45,15 @@ export default class CustomerLoginPage extends Component {
                 'Content-Type': 'application/json',
               },
             body: JSON.stringify(visitationData)
-        }).then( (json) => {
-            console.log(json);
+        })
+        .then((response) => response.json())
+        .then((responseJson) => {
+            console.log(responseJson);
+            if(responseJson.isError == true){
+                alert(responseJson.errorMsg);
+            } else {
+                alert(responseJson.visitId)
+            }
         });
     }
     onClick(event, stringuser) {
@@ -51,33 +65,36 @@ export default class CustomerLoginPage extends Component {
             <PageTemplate>
                 <Row className="align-items-center justify-content-center" style={{marginTop:"25%", textAlign:"center"}}>
                     <Col className="w-100">
-                        <form onSubmit={this.onSubmit} id="username-form" className="w-100">
-                            <Form.Control id="id-familyName" type="text" name="id-familyNam" placeholder="family name" className="mb-2" 
-                            value={this.state.familyName} onChange={this.handleChange.bind(this, 'familyName')}/>
+                        <form onSubmit={this.onSubmit} id="familyName-form" className="w-100">
+                            <Form.Control id="id-familyName" type="text" name="id-familyName" placeholder="family name" className="mb-2" 
+                            value={this.state.visitationForm.familyName} onChange={this.handleChange.bind(this, 'familyName')} required/>
 
                             <Form.Control id="id-firstName" type="text" name="id-firstName" placeholder="first name" className="mb-2" 
-                            value={this.state.firstName} onChange={this.handleChange.bind(this, 'firstName')}/>
+                            value={this.state.visitationForm.firstName} onChange={this.handleChange.bind(this, 'firstName')} required/>
 
                             <Form.Control id="id-lastName" type="text" name="id-lastName" placeholder="last name" className="mb-2" 
-                            value={this.state.lastName} onChange={this.handleChange.bind(this, 'lastname')}/>
+                            value={this.state.visitationForm.lastName} onChange={this.handleChange.bind(this, 'lastName')} required/>
 
-                            <Form.Group controlId="form.visitationSelect">
-                                <Form.Control as="select" value={this.state.visitationType} onChange={this.handleChange.bind(this, 'visitationType')}>
-                                <option>Purpose of Visit</option>
-                                <option>AHCCCS</option>
-                                <option>WIC</option>
-                                <option>Food Bank</option>
-                                <option>FTF (Classes)</option>
-                                <option>Diapers</option>
-                                <option>Medical</option>
-                                <option>Dental</option>
-                                <option>Immunizations</option>
-                                <option>Vision and Hearing</option>
+                            <Form.Group controlId="form.visitationSelect" required>
+                                <Form.Control as="select" value={this.state.visitationForm.visitationType} onChange={this.handleChange.bind(this, 'visitationType')}>
+                                <option value="">Purpose of Visit</option>
+                                <option value="AHCCCS">AHCCCS</option>
+                                <option value="WIC">WIC</option>
+                                <option value="Food Bank">Food Bank</option>
+                                <option value="FTF">FTF (Classes)</option>
+                                <option value="Diapers">Diapers</option>
+                                <option value="Medical">Medical</option>
+                                <option value="Dental">Dental</option>
+                                <option value="Immunizations">Immunizations</option>
+                                <option value="Vision and Hearing">Vision and Hearing</option>
                                 </Form.Control>
                             </Form.Group>
+
+                            <Form.Control id="id-dov" type="date" name="id-dov" placeholder="Visit Date" className="mb-2" 
+                            value={this.state.visitationForm.dov} onChange={this.handleChange.bind(this, 'dov')} required/>
                             
-                            <Button type="submit" className="mb-3">Submit</Button>
-                            {/* <Link to={{ pathname: "/user/" + this.state.username, state: { visitedDate: this.state.visitedDate, vistsLeft: this.state.vistsLeft } }}>Submit</Link> */}
+                            <Button type="submit" className="mb-3" style={{marginTop:"5%"}}>Submit</Button>
+                            {/* <Link to={{ pathname: "/user/" + this.state.familyName, state: { visitedDate: this.state.visitedDate, vistsLeft: this.state.vistsLeft } }}>Submit</Link> */}
                         </form>
                     </Col>
                 </Row>

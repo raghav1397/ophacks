@@ -3,9 +3,9 @@ const models = require('../models').models;
 const router = Router();
 
 router.get('/', async (req, res) => {
-  if(req.query.userName){
+  if(req.query.familyName){
     const user = await req.context.models.User.findByUserName(
-      req.query.userName
+      req.query.familyName
     );
     return res.send(user);
   }
@@ -16,7 +16,7 @@ router.get('/', async (req, res) => {
 router.post('/', async (req, res) => {
   const formData = req.body.formData;
   const userModel = new models.User({
-    username: "formData25",
+    familyName: formData.familyName,
     firstName: formData.firstName,
     lastName: formData.lastName,
     dateOfBirth: new Date(),
@@ -38,7 +38,7 @@ router.post('/', async (req, res) => {
     childCareType: formData.childCareType,
 
   });
-  const user = await req.context.models.User.createUser(req.body.formData.username,userModel);
+  const user = await req.context.models.User.createUser(req.body.formData.familyName,userModel);
   if(user && user.isError){
     return res.status(500).send("Error in creating user. Contact Office");
   }else if(user){

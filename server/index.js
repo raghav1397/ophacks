@@ -19,7 +19,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(async (req, res, next) => {
   req.context = {
     models
-    // me: await models.User.findByUser('rwieruch'),
   };
   next();
 });
@@ -31,7 +30,7 @@ app.use('/visitation', routes.visitation);
 app.use('/household', routes.household);
 // Start
 
-const eraseDatabaseOnSync = true;
+const eraseDatabaseOnSync = false;
 
 connectDb().then(async () => {
   if (eraseDatabaseOnSync) {
@@ -42,10 +41,10 @@ connectDb().then(async () => {
       models.Household.deleteMany({})
     ]);
 
-    await createUser("1234");
+    // await createUser("1234");
     // await updateUser();
-    await visitCreate("1234");
-    await householdCreate("1234");
+    // await visitCreate("1234");
+    // await householdCreate("1234");
     // await visitCount1("1234");
 
   }
@@ -57,8 +56,8 @@ connectDb().then(async () => {
 });
 
 const createUser = async (formData) => {
-  var cnt = await models.User.checkByUserName("formData",models.User);
-  if(cnt == 0){
+  // var cnt = await models.User.checkByUserName("formData", formData);
+  // if(cnt == 0){
     const user = new models.User({
       username: "formData",
       firstName: "formData",
@@ -80,15 +79,16 @@ const createUser = async (formData) => {
       monthlyIncomeAmount: 9999999999,
       monthlyIncomeType: "formData",
       medicalInsurance: "formData",
-      childCareType: "formData",
+      childCareType: "formData"
 
     });
 
+    console.log(user);
     await user.save();
-  }
-  else{
-    console.log("Already UserName Exists");
-  }
+  // }
+  // else{
+  //   console.log("Already UserName Exists");
+  // }
 
 };
 

@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const userSchema = new mongoose.Schema({
-  username: {
+  familyName: {
     type: String,
     unique: true,
   },
@@ -71,9 +71,9 @@ const userSchema = new mongoose.Schema({
   }
 });
 
-userSchema.statics.findByUserName = async function(username) {
+userSchema.statics.findByUserName = async function(familyName) {
   let user = await this.findOne({
-    username: username,
+    familyName: familyName,
   });
 
   if (!user) {
@@ -83,10 +83,10 @@ userSchema.statics.findByUserName = async function(username) {
   return user;
 };
 
-userSchema.statics.createUser = async function(username, userObj) {
+userSchema.statics.createUser = async function(familyName, userObj) {
   console.log(userObj);
   //Count users
-  let cnt = await userObj.countDocuments({username:username});
+  let cnt = await this.countDocuments({familyName:familyName});
   if(cnt >= 0){
     await userObj.save();
     return { 
@@ -101,30 +101,25 @@ userSchema.statics.createUser = async function(username, userObj) {
 
 };
 
-userSchema.statics.checkByUserName = async (username,userObj) => {
-  var cnt;
-  await userObj.countDocuments({username:username}, function(err, c){
-    if(err) 
-    {
-      cnt = 0;
-    }
-    else {
-      cnt = c;
-    }
-  });
-  return cnt;
+userSchema.statics.checkByUserName = async (familyName,userObj) => {
+  //returns count of user names
+  return await this.countDocuments({familyName:familyName});
 };
 
-userSchema.statics.getAge = async function(username, firstname, lastname) {		
+userSchema.statics.getAge = async function(familyName, firstname, lastname) {		
   let user = await this.findOne({		
-    username: username,		
+    familyName: familyName,		
     firstName: firstname,		
     lastName: lastname,		
   });		
-  if(user) {		
+  if(user) {
     var age = Math.ceil(Math.abs(Date.now() - new Date(user['dateOfBirth']))/(1000*60*60*24*365));		
     return age;		
-  }		
+  } else {
+    return {
+      isError: true,
+      errorMsg: "User not registered"}
+  }
 }
 
 

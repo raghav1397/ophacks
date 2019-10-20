@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const householdSchema = new mongoose.Schema({
-  username: {
+  familyName: {
     type: String,
   },
   firstName: {
@@ -45,9 +45,9 @@ const householdSchema = new mongoose.Schema({
   }
 });
 
-householdSchema.statics.findByUserName = async function(username, firstName, lastName) {
+householdSchema.statics.findByUserName = async function(familyName, firstName, lastName) {
   let member = await this.findOne({
-    username: username,
+    familyName: familyName,
     firstName: firstName,
     lastName: lastName
   });
