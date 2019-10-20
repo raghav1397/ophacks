@@ -121,6 +121,7 @@ export default class CreateUserPage extends Component {
                                 <SwitchCard curIndex={this.state.currentSlideIndex} changeButton={this.currentSlide} handler={this.handler} visbilityFun={this.visbilityFun} />
                             </Row>
                             <Row className="w-100">
+                                <p></p>
                                 <div className="d-flex flex-column justify-content-center w-100">
                                     <button type="cancel" className={"btn btn-primary input-create-control mb-3 mt-3 " + this.state.visbility} onClick={this.onCancel}>Cancel</button>
                                     <button type="submit" className={"btn btn-primary input-create-control " + this.state.visbility} onClick={this.onSubmit}>Submit</button>
