@@ -20,6 +20,7 @@ export default class ThirdCreateFormScreen extends Component {
         this.handleChange = this.handleChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
         this.next = this.next.bind(this);
+        this.previous = this.previous.bind(this);
     }
 
     onSubmit(event) {
@@ -30,6 +31,10 @@ export default class ThirdCreateFormScreen extends Component {
         event.preventDefault();
         this.props.handler(this.state);
         this.props.changeButton(3);
+    }
+    previous(event){
+        event.preventDefault();
+        this.props.changeButton(1);
     }
 
     handleChange(propertyName, event) {

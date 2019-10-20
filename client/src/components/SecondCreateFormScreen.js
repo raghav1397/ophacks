@@ -18,6 +18,7 @@ export default class SecondCreateFormScreen extends Component {
         this.handleChange = this.handleChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
         this.next = this.next.bind(this);
+        this.previous = this.previous.bind(this);
     }
 
     onSubmit(event) {
@@ -28,6 +29,10 @@ export default class SecondCreateFormScreen extends Component {
         event.preventDefault();
         this.props.handler(this.state);
         this.props.changeButton(2);
+    }
+    previous(event){
+        event.preventDefault();
+        this.props.changeButton(0)
     }
 
     handleChange(propertyName, event) {

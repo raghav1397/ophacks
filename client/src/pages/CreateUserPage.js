@@ -7,7 +7,6 @@ import PageTemplate from './PageTemplate';
 import { Row, Col } from 'react-bootstrap';
 import { FaUserPlus } from 'react-icons/fa';
 import SummaryScreen from '../components/SummaryScreen';
-import {useHistory} from 'react-router-dom';
 
 const HOSTNAME = "http://localhost:5000";
 
@@ -51,6 +50,7 @@ export default class CreateUserPage extends Component {
         this.handler = this.handler.bind(this);
         this.currentSlide = this.currentSlide.bind(this);
         this.visbilityFun = this.visbilityFun.bind(this);
+        this.onCancel = this.onCancel.bind(this);
     }
 
     //stack -> keep current state
@@ -65,8 +65,9 @@ export default class CreateUserPage extends Component {
 
     onCancel(event){
         event.preventDefault();
-        let history = useHistory();
-        history.push("/");
+        this.props.history.push({
+            pathname:"/login"
+        })
     }
     //on Submit
     onSubmit(event) {
@@ -83,6 +84,10 @@ export default class CreateUserPage extends Component {
             },
             body: JSON.stringify(this.state)
         });
+        alert("Success");
+        this.props.history.push({
+            pathname: "/login"
+        })
         event.preventDefault();
     }
 

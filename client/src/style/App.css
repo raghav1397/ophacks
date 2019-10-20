@@ -84,3 +84,14 @@ html,body {
 .show-button{
   visibility:visible;
 }
+a{
+  color:white;
+  text-decoration: none;
+}
+a:visited{
+  color:white;
+}
+a:hover{
+  color:white !important;
+  text-decoration: none !important;
+}

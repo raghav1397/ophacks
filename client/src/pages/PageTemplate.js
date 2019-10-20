@@ -1,11 +1,12 @@
 import React from 'react';
 import { Container, Row,Col } from 'react-bootstrap'
 import { Nav, Navbar } from  'react-bootstrap'
+import {Link} from 'react-router-dom';
 
 const PageTemplate = ({ children }) => (
     <div id="page-template">
         <Navbar bg="primary" variant="dark">
-    <Navbar.Brand href="#home">Chandler Care Center </Navbar.Brand>
+    <Navbar.Brand><Link to="/">Chandler Care Center</Link> </Navbar.Brand>
     {/* <Nav className="mr-auto">
     </Nav> */}
   </Navbar>

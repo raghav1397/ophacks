@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PageTemplate from './PageTemplate';
 import { Redirect } from 'react-router-dom';
 import { Row, Col } from 'react-bootstrap';
-var QRCode = require('qrcode.react')
+//var QRCode = require('qrcode.react')
 
 class CustomerViewPage extends Component {
     constructor(props) {
@@ -18,7 +18,6 @@ class CustomerViewPage extends Component {
 
     componentDidMount() {
         try {
-            let isvisitedDate = this.props.location.state.visitedDate;
             let visitationData = this.props.location.state.visitationData;
             this.setState({
                 familyName: visitationData.familyName,
@@ -67,7 +66,7 @@ class CustomerViewPage extends Component {
                             
                             <Row>
                                 <Col>
-                                    <QRCode value={this.state.visitId} />
+                                   {/* <QRCode value={this.state.visitId} /> */}
                                 </Col>
                             </Row>
                             </Col>

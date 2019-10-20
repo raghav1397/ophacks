@@ -15,6 +15,7 @@ export default class FourCreateFormScreen extends Component {
         this.handleChange = this.handleChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
         this.next = this.next.bind(this);
+        this.previous = this.previous.bind(this);
     }
 
     onSubmit(event) {
@@ -28,9 +29,9 @@ export default class FourCreateFormScreen extends Component {
         this.props.changeButton(4);
         this.props.visbilityFun(event);
     }
-    onPrevious(event){
+    previous(event){
         event.preventDefault();
-        console.log("Previous state was activated")
+        this.props.changeButton(2);
     }
 
     handleChange(propertyName, event) {

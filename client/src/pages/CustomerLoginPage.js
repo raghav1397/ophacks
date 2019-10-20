@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PageTemplate from './PageTemplate';
 import { Row, Col, Button, Form } from 'react-bootstrap';
-import { Redirect } from 'react-router-dom';
 const HOSTNAME = "http://localhost:5000"
 
 export default class CustomerLoginPage extends Component {
