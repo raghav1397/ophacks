@@ -8,7 +8,7 @@ export default class DashboardPage extends Component {
         }
     }
     componentWillMount(){
-        this.setState({username: this.location.state.username});
+        this.setState({username: "admin"})
     }
     render() {
 
