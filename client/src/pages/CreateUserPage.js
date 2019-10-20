@@ -4,68 +4,69 @@ import FirstCreateFormScreen from '../components/FirstCreateFormScreen'
 import SecondCreateFormScreen from '../components/SecondCreateFormScreen'
 import ThirdCreateFormScreen from '../components/ThirdCreateFormScreen'
 import FourCreateFormScreen from '../components/FourCreateFormScreen'
+import PageTemplate from './PageTemplate'
 
 
 export default class CreateUserPage extends Component {
-    constructor(){
+    constructor() {
         super();
-        this.state ={
+        this.state = {
             submittedor: "Not submitted",
-            firstname : "",
+            firstname: "",
             lastname: "",
             dateofbirth: "",
             address: "",
             aptnumber: "",
             zipcode: "",
             city: "",
-            phonenumber:"",
+            phonenumber: "",
             gender: "",
             housingtype: "",
-            maritaltype:"",
+            maritaltype: "",
             ethincity: [""],
             self: [""],
             highed: "",
             primarydoctor: false,
             dentalinsurance: false,
-            employeetype:"",
+            employeetype: "",
             monthyincome: "",
             montthyincometype: "",
-            monthyincomeother:[""],
+            monthyincomeother: [""],
             medicaltype: "",
             childcaretype: "",
         }
         this.onSubmit = this.onSubmit.bind(this);
     }
 
-    onSubmit(event){
+    onSubmit(event) {
         const data = "";
 
         this.setState({
             submittedor: "Data Attempted to submit"
         })
-        fetch('./api/url',{
+        fetch('./api/url', {
             method: 'POST',
-            body: data 
+            body: data
         });
         event.preventDefault();
     }
-    onCancel(event){
+    onCancel(event) {
         //reset the fields currently in the area.
     }
     render() {
         return (
-            <div>
+            <PageTemplate>
                 <h2>Create User Page</h2>
                 <form onSubmit={this.onSubmit}>
-                   <FirstCreateFormScreen />
-                   <SecondCreateFormScreen />
-                   <ThirdCreateFormScreen />
-                  <FourCreateFormScreen />
-                  <button type="cancel">Cancel</button>
-                  <button type="submit">Submit</button>
-                  <p>{this.state.submittedor}</p>
+                    <FirstCreateFormScreen />
+                    <SecondCreateFormScreen />
+                    <ThirdCreateFormScreen />
+                    <FourCreateFormScreen />
+                    <button type="cancel">Cancel</button>
+                    <button type="submit">Submit</button>
+                    <p>{this.state.submittedor}</p>
                 </form>
-            </div>
+            </PageTemplate>
         )
     }
 }

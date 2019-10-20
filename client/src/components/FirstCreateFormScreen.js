@@ -1,6 +1,22 @@
 import React, { Component } from 'react'
 
 export default class FirstCreateFormScreen extends Component {
+    constructor(){
+        super();
+        this.state ={
+            checked: true,
+            currentvalue: ""
+        }
+        this.handleChange = this.handleChange.bind(this);
+    }
+
+    handleChange(event){
+        console.log(event.target.value);
+        this.setState({
+            currentvalue : (event.target.value)
+        });
+        console.log(event.target.value);
+    }
     render() {
         return (
             <div>
@@ -51,12 +67,12 @@ export default class FirstCreateFormScreen extends Component {
                     <br />
                     <div className="martial status">
                         <span>Marital Status: </span>
-                        <input type="radio" name="martial-status" value="single" /> <span>Single</span>
-                        <input type="radio" name="martial-status" value="married" /> <span>Married</span>
-                        <input type="radio" name="martial-status" value="divorced" /> <span>Divoreced</span>
-                        <input type="radio" name="martial-status" value="seperated" /> <span>Seperated</span>
-                        <input type="radio" name="martial-status" value="windowed" /> <span>Windowed</span>
-                        <input type="radio" name="martial-status" value="udisclosed" /> <span>Undisclosed</span>
+                        <input type="radio" name="martial-status" value="single" checked={this.state.checked} onChange={this.handleChange}/> <span>Single</span>
+                        <input type="radio" name="martial-status" value="married"  checked={this.onChecked} onChange={this.handleChange}/> <span>Married</span>
+                        <input type="radio" name="martial-status" value="divorced" onChange={this.onChange}/> <span>Divorced</span>
+                        <input type="radio" name="martial-status" value="seperated" onChange={this.onChange}/> <span>Seperated</span>
+                        <input type="radio" name="martial-status" value="windowed" onChange={this.onChange}/> <span>Windowed</span>
+                        <input type="radio" name="martial-status" value="udisclosed"onChange={this.onChange} /> <span>Undisclosed</span>
                     </div>
                     <br />
                     <br />
