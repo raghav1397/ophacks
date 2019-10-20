@@ -48,32 +48,22 @@ export default class FirstCreateFormScreen extends Component {
 
     render() {
         return (
-            <Row>
-                <Col>
+            <Row className="w-100">
+                <Col className="d-flex flex-column justify-content-center">
                     <h2 className="text-right">First Form</h2>
-                    <Form>
-                        <Form.Control type="text" name="lastname" value={this.state.form1.lastname} onChange={this.handleChange.bind(this, 'lastname')} placeholder="Lastname" required />
-                        <Form.Control type="text" name="firstname" value={this.state.form1.firstname} onChange={this.handleChange.bind(this, 'firstname')} placeholder="Firstname" required />
-                        <Form.Control type="date" name="dateofbirth" value={this.state.form1.dob} onChange={this.handleChange.bind(this, 'dob')} required />
-                        <Form.Control type="text" name="address" value={this.state.form1.addressLine1} onChange={this.handleChange.bind(this, 'addressLine1')} placeholder="address" />
-                        <Form.Control type="text" name="apartment" value={this.state.form1.addressLine2} onChange={this.handleChange.bind(this, 'addressLine2')} placeholder="apartment number" />
-                        <label for="create-zipcode">Zipcode: </label>
-                        <input id="create-zipcode" type="text"
-                            value={this.state.form1.zipcode} onChange={this.handleChange.bind(this, 'zipcode')} required />
-                        <br></br>
-                        <br></br>
-                        <label for="create-phone-number">Phone Number:</label>
-                        <input id="create-phone-number"
-                            value={this.state.form1.phNo} onChange={this.handleChange.bind(this, 'phNo')} required />
-                        <br />
-                        <br />
-                        <div> Gender Type
-                        <select name="gender"
-                                value={this.state.form1.gender} onChange={this.handleChange.bind(this, 'gender')}>
-                                <option value="male">Male</option>
-                                <option value="female">Female</option>
-                            </select>
-                        </div>
+                    <Form className="d-flex flex-column justify-content-center">
+                        <Form.Control type="text" name="lastname" value={this.state.form1.lastname} onChange={this.handleChange.bind(this, 'lastname')} className="input-create-control mb-3" placeholder="Last Name" required />
+                        <Form.Control type="text" name="firstname" value={this.state.form1.firstname} onChange={this.handleChange.bind(this, 'firstname')} className="input-create-control mb-3" placeholder="First Name" required />
+                        <Form.Control type="date" name="dateofbirth" value={this.state.form1.dob} onChange={this.handleChange.bind(this, 'dob')} className="input-create-control mb-3" required />
+                        <Form.Control type="text" name="address" value={this.state.form1.addressLine1} onChange={this.handleChange.bind(this, 'addressLine1')}  className="input-create-control mb-3" placeholder="123 easy street" required/>
+                        <Form.Control type="text" name="apartment" value={this.state.form1.addressLine2} onChange={this.handleChange.bind(this, 'addressLine2')} className="input-create-control mb-3" placeholder="apartment 1234" required/>
+                        <Form.Control type="text" name="zipcode" id="create-zipcode" value={this.state.form1.zipcode} onChange={this.handleChange.bind(this, 'zipcode')}  className="input-create-control mb-3" placeholder="zipcode" required />
+                        <Form.Control type="text" name="phonenumber"  id="create-zipcode" value={this.state.form1.zipcode} onChange={this.handleChange.bind(this, 'phonenumber')} className="input-create-control mb-3" placeholder="123-456-7890" required />
+                        <Form.Control as="select" name="gender" value={this.state.form1.gender} onChange={this.handleChange.bind(this,'gender')} className="input-create-control mb-3" required>
+                            <option value="" selected>Select your Gender</option>
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                        </Form.Control>
                         <br></br>
                         <div>Housing Type:
                         <select name="housingtype"
