@@ -9,8 +9,9 @@ export default class FirstCreateFormScreen extends Component {
         super();
         this.state = {
             form1: {
-                firstname: '',
-                lastname: '',
+                familyName: '',
+                firstName: '',
+                lastName: '',
                 dob: '',
                 addressLine1: '',
                 addressLine2: '',
@@ -38,8 +39,6 @@ export default class FirstCreateFormScreen extends Component {
     }
 
     handleChange(propertyName, event) {
-        // event.preventDefault();
-        console.log("event::", event);
         const contact = this.state.form1;
         contact[propertyName] = event.target.value;
         this.setState({ form1: contact });
@@ -60,13 +59,14 @@ export default class FirstCreateFormScreen extends Component {
                 <Col>
                     <h2 className="text-center">First Step</h2>
                     <Form className="d-flex flex-column justify-content-center">
-                        <Form.Control type="text" name="lastname" value={this.state.form1.lastname} onChange={this.handleChange.bind(this, 'lastname')} className="input-create-control mb-3" placeholder="Last Name" required />
-                        <Form.Control type="text" name="firstname" value={this.state.form1.firstname} onChange={this.handleChange.bind(this, 'firstname')} className="input-create-control mb-3" placeholder="First Name" required />
+                        <Form.Control type="text" name="familyName" value={this.state.form1.familyName} onChange={this.handleChange.bind(this, 'familyName')} className="input-create-control mb-3" placeholder="Family Name" required />
+                        <Form.Control type="text" name="firstname" value={this.state.form1.firstName} onChange={this.handleChange.bind(this, 'firstName')} className="input-create-control mb-3" placeholder="First Name" required />
+                        <Form.Control type="text" name="lastname" value={this.state.form1.lastName} onChange={this.handleChange.bind(this, 'lastName')} className="input-create-control mb-3" placeholder="Last Name" required />
                         <Form.Control type="date" name="dateofbirth" value={this.state.form1.dob} onChange={this.handleChange.bind(this, 'dob')} className="input-create-control mb-3" required />
                         <Form.Control type="text" name="address" value={this.state.form1.addressLine1} onChange={this.handleChange.bind(this, 'addressLine1')} className="input-create-control mb-3" placeholder="123 easy street" required />
                         <Form.Control type="text" name="apartment" value={this.state.form1.addressLine2} onChange={this.handleChange.bind(this, 'addressLine2')} className="input-create-control mb-3" placeholder="apartment 1234" required />
                         <Form.Control type="text" name="zipcode" id="create-zipcode" value={this.state.form1.zipcode} onChange={this.handleChange.bind(this, 'zipcode')} className="input-create-control mb-3" placeholder="zipcode" required />
-                        <Form.Control type="text" name="phonenumber" id="create-zipcode" value={this.state.form1.zipcode} onChange={this.handleChange.bind(this, 'phonenumber')} className="input-create-control mb-3" placeholder="123-456-7890" required />
+                        <Form.Control type="text" name="phonenumber" id="phNo" value={this.state.form1.phNo} onChange={this.handleChange.bind(this, 'phNo')} className="input-create-control mb-3" placeholder="123-456-7890" required />
                         <Form.Control as="select" name="gender" value={this.state.form1.gender} onChange={this.handleChange.bind(this, 'gender')} className="input-create-control mb-3" required>
                             <option value="" selected disabled hidden>Select your gender</option>
                             <option value="male">Male</option>

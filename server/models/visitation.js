@@ -6,7 +6,7 @@ const visitationSchema = new mongoose.Schema({
         type: String,
         unique: true,
     },
-    username: {
+    familyName: {
       type: String,
     },
     firstName: {
@@ -27,13 +27,12 @@ const visitationSchema = new mongoose.Schema({
 });
 
 visitationSchema.statics.totalFamilyCount = async function(visitationType) {
-    const count = (await this.distinct('username')).length;
+    const count = (await this.distinct('familyName')).length;
     return count;
 };
 
-visitationSchema.statics.yearlyCount = async function(username, visitationType) {
-    var cnt;
-    const cur_date = new Date(Date.now());
+visitationSchema.statics.yearlyCount = async function(familyName, visitationType, dateOfVisit) {
+    const cur_date = new Date(dateOfVisit);
     var yr = cur_date.getFullYear();
     var mn = cur_date.getMonth();
     if(mn<6){
@@ -42,25 +41,17 @@ visitationSchema.statics.yearlyCount = async function(username, visitationType) 
     else{
         var start_date = new Date(yr.toString()+"-07-01");
     }
-    await this.countDocuments({username: username, visitationType:visitationType, dateOfVisit: {"$gte": start_date, "$lt": cur_date}}, function(err, c){
-    if(err)
-    {
-        cnt = 0;
-    }
-    else {
-        cnt = c;
-    }
-    });
+    let cnt = await this.countDocuments({familyName: familyName, visitationType:visitationType, dateOfVisit: {"$gte": start_date, "$lt": cur_date}});
     return cnt;
 }
 
-visitationSchema.statics.monthlyCount = async function(username, visitationType) {
+visitationSchema.statics.monthlyCount = async function(familyName, visitationType) {
     var cnt;
     const cur_date = new Date(Date.now());
     var yr = cur_date.getFullYear();
     var mn = cur_date.getMonth();
     var start_date = new Date(yr.toString()+"-"+mn.toString()+"-01");
-    await this.countDocuments({username: username, visitationType:visitationType, dateOfVisit: {"$gte": start_date, "$lt": cur_date}}, function(err, c){
+    await this.countDocuments({familyName: familyName, visitationType:visitationType, dateOfVisit: {"$gte": start_date, "$lt": cur_date}}, function(err, c){
     if(err)
     {
         cnt = 0;
@@ -77,45 +68,8 @@ visitationSchema.pre('remove', function(next) {
     this.model('Message').deleteMany({ visitation: this._id }, next);
   });
 
-// userSchema.statics.deleteByUserName = async function(username) {
-//     await this.deleteOne({username: username});
-// };
-
-// // userSchema.statics.checkByUserName1 = async function(username) {
-// //   await this.findOne({username: username}, function(e, data){
-// //     if(e){
-// //       console.log("success");
-// //       return "success";
-// //     }
-// //     else{
-// //       console.log("failure");
-// //       return "failure";
-// //     }
-// // })};
-
-// userSchema.statics.checkByUserName = async function(username) {
-//     var cnt;
-//     await this.countDocuments({username:username}, function(err, c){
-//     if(err) 
-//     {
-//         cnt = 0;
-//     }
-//     else {
-//         cnt = c;
-//     }
-//     });
-//     return cnt;
-// };
-
-
-
-// userSchema.pre('remove', function(next) {
-//     this.model('Message').deleteMany({ user: this._id }, next);
-// });
-
 const Visitation = mongoose.model('Visitation', visitationSchema);
 
 module.exports = {
     'Visitation' : Visitation
 }
-    

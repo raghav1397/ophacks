@@ -88,12 +88,10 @@ export default class CreateUserPage extends Component {
 
     //Handler Function
     handler(obj) {
-        console.log(obj);
         let stateObj = this.state.formData;
         for (var prop in obj) {
             const nestedObj = obj[prop]
             for (var key in nestedObj) {
-                console.log('The value of ' + key + ' is ' + nestedObj[key] + '.');
                 stateObj[key] = nestedObj[key];
             }
 
